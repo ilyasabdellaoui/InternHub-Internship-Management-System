@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Mes Stages - InternHub</title>
+    <!-- CSS files -->
+    <link href="../dist/css/tabler.min.css?1684106062" rel="stylesheet"/>
+    <link href="../dist/css/tabler-flags.min.css?1684106062" rel="stylesheet"/>
+    <link href="../dist/css/tabler-payments.min.css?1684106062" rel="stylesheet"/>
+    <link href="../dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet"/>
+    <link href="../dist/css/demo.min.css?1684106062" rel="stylesheet"/>
+    <style>
+      @import url('https://rsms.me/inter/inter.css');
+      :root {
+      	--tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+      }
+      body {
+      	font-feature-settings: "cv03", "cv04", "cv11";
+      }
+    </style>
+  </head>
+  <body >
+    <script src="../dist/js/demo-theme.min.js?1684106062"></script>
+    <div class="page">
+      <!-- Navbar -->
+      <header class="navbar navbar-expand-md d-print-none" >
+        <div class="container-xl">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+            <a href=".">
+              <img src="../images/largeLogo3.png" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+            </a>
+          </h1>
+          <div class="navbar-nav flex-row order-md-last me-2">
+            <div class="d-none d-md-flex m-2">
+              <a href="#" class="btn btn-pinterest w-100 btn-icon" title="Se déconnecter" data-bs-toggle="tooltip"
+              data-bs-placement="bottom">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-power" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 6a7.75 7.75 0 1 0 10 0" /><path d="M12 4l0 8" /></svg>
+              </a>
+              <a href="?theme=dark" class="nav-link px-0 hide-theme-dark" title="Activer dark mode" data-bs-toggle="tooltip"
+		   data-bs-placement="bottom">
+                <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" /></svg>
+              </a>
+              <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="Activer light mode" data-bs-toggle="tooltip"
+		   data-bs-placement="bottom">
+                <!-- Download SVG icon from http://tabler-icons.io/i/sun -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" /><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7" /></svg>
+              </a>            
+            </div>
+            <div class="nav-item dropdown">
+              <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
+                <span class="avatar avatar-sm" style="background-image: url(../images/emcLogo.png)"></span>
+                <div class="d-none d-xl-block ps-2">
+                  <div>Ahmed Lazrak</div>
+                  <div class="mt-1 small text-muted">Etudiant</div>
+                </div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                <a href="../login.html" class="dropdown-item">Se déconnecter</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="page-wrapper">
+        <!-- Page header -->
+        <div class="page-header d-print-none">
+          <div class="container-xl">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <h2 class="page-title">
+                  Mes Stages
+                </h2>
+              </div>
+              <div class="col">
+                <a href="#" class="btn btn-primary float-end">
+                  + Ajouter un stage
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Page body -->
+        <div class="page-body">
+          <div class="container-xl">
+            <div class="card">
+              <div class="card-body">
+                <div id="table-default" class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th><button class="table-sort" data-sort="sort-name">Name</button></th>
+                        <th><button class="table-sort" data-sort="sort-city">City</button></th>
+                        <th><button class="table-sort" data-sort="sort-type">Type</button></th>
+                        <th><button class="table-sort" data-sort="sort-score">Score</button></th>
+                        <th><button class="table-sort" data-sort="sort-date">Date</button></th>
+                        <th><button class="table-sort" data-sort="sort-quantity">Quantity</button></th>
+                        <th><button class="table-sort" data-sort="sort-progress">Progress</button></th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-tbody">
+                      <tr>
+                        <td class="sort-name">Expedition Ge Force</td>
+                        <td class="sort-city">Holiday Park, Germany</td>
+                        <td class="sort-type">Intamin Megacoaster, Steel</td>
+                        <td class="sort-score">98,2%</td>
+                        <td class="sort-date" data-date="1565107347">August 06, 2019</td>
+                        <td class="sort-quantity">157</td>
+                        <td class="sort-progress" data-progress="57">
+                          <div class="row align-items-center">
+                            <div class="col-12 col-lg-auto">57%</div>
+                            <div class="col">
+                              <div class="progress" style="width: 5rem">
+                                <div class="progress-bar" style="width: 57%" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" aria-label="57% Complete">
+                                  <span class="visually-hidden">57% Complete</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="sort-name">Storm Chaser</td>
+                        <td class="sort-city">Kentucky Kingdom, United States</td>
+                        <td class="sort-type">RMC Steel</td>
+                        <td class="sort-score">97,9%</td>
+                        <td class="sort-date" data-date="1564805623">August 03, 2019</td>
+                        <td class="sort-quantity">43</td>
+                        <td class="sort-progress" data-progress="42">
+                          <div class="row align-items-center">
+                            <div class="col-12 col-lg-auto">42%</div>
+                            <div class="col">
+                              <div class="progress" style="width: 5rem">
+                                <div class="progress-bar" style="width: 42%" role="progressbar" aria-valuenow="42" aria-valuemin="0" aria-valuemax="100" aria-label="42% Complete">
+                                  <span class="visually-hidden">42% Complete</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="sort-name">Helix</td>
+                        <td class="sort-city">Liseberg, Sweden</td>
+                        <td class="sort-type">Mack Looper, Steel, Terrain</td>
+                        <td class="sort-score">97,9%</td>
+                        <td class="sort-date" data-date="1633500491">October 06, 2021</td>
+                        <td class="sort-quantity">151</td>
+                        <td class="sort-progress" data-progress="54">
+                          <div class="row align-items-center">
+                            <div class="col-12 col-lg-auto">54%</div>
+                            <div class="col">
+                              <div class="progress" style="width: 5rem">
+                                <div class="progress-bar" style="width: 54%" role="progressbar" aria-valuenow="54" aria-valuemin="0" aria-valuemax="100" aria-label="54% Complete">
+                                  <span class="visually-hidden">54% Complete</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer footer-transparent d-print-none">
+          <div class="container-xl">
+            <div class="row text-center align-items-center flex-row-reverse">
+              <div class="col-12 mb-2 mt-lg-0">
+                <ul class="list-inline list-inline-dots mb-0">
+                  <li class="list-inline-item">
+                    Copyright &copy; 2024
+                    <a href="." class="link-secondary">InternHub</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <!-- Libs JS -->
+    <script src="../dist/libs/list.js/dist/list.min.js?1684106062" defer></script>
+    <!-- Tabler Core -->
+    <script src="../dist/js/tabler.min.js?1684106062" defer></script>
+    <script src="../dist/js/demo.min.js?1684106062" defer></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+      const list = new List('table-default', {
+      	sortClass: 'table-sort',
+      	listClass: 'table-tbody',
+      	valueNames: [ 'sort-name', 'sort-type', 'sort-city', 'sort-score',
+      		{ attr: 'data-date', name: 'sort-date' },
+      		{ attr: 'data-progress', name: 'sort-progress' },
+      		'sort-quantity'
+      	]
+      });
+      })
+    </script>
+  </body>
+</html>
