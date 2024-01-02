@@ -95,75 +95,47 @@
                   <table class="table">
                     <thead>
                       <tr>
-                        <th><button class="table-sort" data-sort="sort-name">Name</button></th>
-                        <th><button class="table-sort" data-sort="sort-city">City</button></th>
-                        <th><button class="table-sort" data-sort="sort-type">Type</button></th>
-                        <th><button class="table-sort" data-sort="sort-score">Score</button></th>
-                        <th><button class="table-sort" data-sort="sort-date">Date</button></th>
-                        <th><button class="table-sort" data-sort="sort-quantity">Quantity</button></th>
-                        <th><button class="table-sort" data-sort="sort-progress">Progress</button></th>
+                        <th><button class="table-sort" data-sort="sort-date-debut">Date debut</button></th>
+                        <th><button class="table-sort" data-sort="sort-date-fin">Date fin</button></th>
+                        <th><button class="table-sort" data-sort="sort-entreprise">Entreprise</button></th>
+                        <th><button class="table-sort" data-sort="sort-niveau">Niveau</button></th>
+                        <th><button class="table-sort" data-sort="sort-num">Numéro</button></th>
+                        <th><button class="table-sort" data-sort="sort-statut">Statut</button></th>
+                        <th>Infos</th>
                       </tr>
                     </thead>
                     <tbody class="table-tbody">
-                      <tr>
-                        <td class="sort-name">Expedition Ge Force</td>
-                        <td class="sort-city">Holiday Park, Germany</td>
-                        <td class="sort-type">Intamin Megacoaster, Steel</td>
-                        <td class="sort-score">98,2%</td>
-                        <td class="sort-date" data-date="1565107347">August 06, 2019</td>
-                        <td class="sort-quantity">157</td>
-                        <td class="sort-progress" data-progress="57">
-                          <div class="row align-items-center">
-                            <div class="col-12 col-lg-auto">57%</div>
-                            <div class="col">
-                              <div class="progress" style="width: 5rem">
-                                <div class="progress-bar" style="width: 57%" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" aria-label="57% Complete">
-                                  <span class="visually-hidden">57% Complete</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                      <tr class="align-middle">
+                        <!-- Lharba: this is UNIX timestamp = sec elapsed since Jan 1, 1970 (the Unix epoch) -->
+                        <td class="sort-date-debut" data-date="1704196800">
+                          Janvier 02, 2024
                         </td>
+                        <td class="sort-date-fin" data-date="1704196800">
+                          Janvier 02, 2024
+                        </td>
+                        <td class="sort-entreprise">InterHub</td>
+                        <td class="sort-niveau">2A</td>
+                        <td class="sort-num">1<sup>er</sup></td>
+                        <!-- En révision (can delete and update), Accepté, En cours, Achevé -->
+                        <td class="sort-statut">Accepté</td>
+                        <td><button class="btn btn-warning w-100" data-bs-toggle="modal" data-bs-target="#modal-info">
+                          Détails
+                        </button></td>
                       </tr>
-                      <tr>
-                        <td class="sort-name">Storm Chaser</td>
-                        <td class="sort-city">Kentucky Kingdom, United States</td>
-                        <td class="sort-type">RMC Steel</td>
-                        <td class="sort-score">97,9%</td>
-                        <td class="sort-date" data-date="1564805623">August 03, 2019</td>
-                        <td class="sort-quantity">43</td>
-                        <td class="sort-progress" data-progress="42">
-                          <div class="row align-items-center">
-                            <div class="col-12 col-lg-auto">42%</div>
-                            <div class="col">
-                              <div class="progress" style="width: 5rem">
-                                <div class="progress-bar" style="width: 42%" role="progressbar" aria-valuenow="42" aria-valuemin="0" aria-valuemax="100" aria-label="42% Complete">
-                                  <span class="visually-hidden">42% Complete</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
+                      <tr class="align-middle">
+                        <td class="sort-date-debut" data-date="1704196800">
+                          Janvier 02, 2024
+                        </td> 
+                        <td class="sort-date-fin" data-date="1704196800">
+                          Janvier 02, 2024
                         </td>
-                      </tr>
-                      <tr>
-                        <td class="sort-name">Helix</td>
-                        <td class="sort-city">Liseberg, Sweden</td>
-                        <td class="sort-type">Mack Looper, Steel, Terrain</td>
-                        <td class="sort-score">97,9%</td>
-                        <td class="sort-date" data-date="1633500491">October 06, 2021</td>
-                        <td class="sort-quantity">151</td>
-                        <td class="sort-progress" data-progress="54">
-                          <div class="row align-items-center">
-                            <div class="col-12 col-lg-auto">54%</div>
-                            <div class="col">
-                              <div class="progress" style="width: 5rem">
-                                <div class="progress-bar" style="width: 54%" role="progressbar" aria-valuenow="54" aria-valuemin="0" aria-valuemax="100" aria-label="54% Complete">
-                                  <span class="visually-hidden">54% Complete</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </td>
+                        <td class="sort-entreprise">InterHub</td>
+                        <td class="sort-niveau">2A</td>
+                        <td class="sort-num">1<sup>er</sup></td>
+                        <td class="sort-statut">Accepté</td>
+                        <td><button class="btn btn-warning w-100" data-bs-toggle="modal" data-bs-target="#modal-info">
+                          Détails
+                        </button></td>
                       </tr>
                     </tbody>
                   </table>
@@ -188,6 +160,100 @@
         </footer>
       </div>
     </div>
+    <!-- Modal Détails 1 -->
+    <div class="modal modal-blur fade" id="modal-info" tabindex="-1" aria-hidden="true" style="display: none;">
+      <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Détails stage</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-lg-4">
+                <div class="mb-3">
+                  <label class="form-label">Date début</label>
+                  <input type="text" class="form-control" disabled>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="mb-3">
+                  <label class="form-label">Date fin</label>
+                  <input type="text" class="form-control" disabled>
+                </div>
+              </div>
+              <div class="col-lg-2">
+                <div class="mb-3">
+                  <label class="form-label">Année</label>
+                  <input type="text" value="2A" class="form-control" disabled>
+                </div>
+              </div>
+              <div class="col-lg-2">
+                <div class="mb-3">
+                  <label class="form-label">Ordre</label>
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="mb-3">
+                  <label class="form-label">Nom entreprise</label>
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="mb-3">
+                  <label class="form-label">Ville entreprise</label>
+                  <input type="text" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="mb-3">
+                  <label class="form-label">Contact entreprise</label>
+                  <input type="text" placeholder="Email ou GSM" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="mb-3">
+                  <label class="form-label">Encadrant entreprise</label>
+                  <input type="text" placeholder="Nom complet" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="mb-3">
+                  <label class="form-label">Contact encadrant</label>
+                  <input type="text" placeholder="Email ou GSM" class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="mb-3">
+                  <label class="form-label">Professeur encadrant</label>
+                  <input type="text" value="Salah Baina" disabled class="form-control">
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="mb-3">
+                  <label class="form-label">Convention</label>
+                  <a href="#" class="btn btn-success w-100">Télécharger convention</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a href="#" class="btn btn-link link-secondary" data-bs-dismiss="modal">
+              Annuler
+            </a>
+            <div class="ms-auto">
+              <a href="#" class="btn btn-danger" data-bs-dismiss="modal">
+                Supprimer
+              </a>
+              <a href="#" class="btn btn-info ms-2" data-bs-dismiss="modal">
+                Enregistrer
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Libs JS -->
     <script src="../dist/libs/list.js/dist/list.min.js?1684106062" defer></script>
     <!-- Tabler Core -->
@@ -198,10 +264,9 @@
       const list = new List('table-default', {
       	sortClass: 'table-sort',
       	listClass: 'table-tbody',
-      	valueNames: [ 'sort-name', 'sort-type', 'sort-city', 'sort-score',
-      		{ attr: 'data-date', name: 'sort-date' },
-      		{ attr: 'data-progress', name: 'sort-progress' },
-      		'sort-quantity'
+      	valueNames: [ { attr: 'data-date', name: 'sort-date-debut' }, { attr: 'data-date', name: 'sort-date-fin' },
+          'sort-niveau', 'sort-num', 'sort-statut',
+      		// { attr: 'data-progress', name: 'sort-progress' },
       	]
       });
       })
