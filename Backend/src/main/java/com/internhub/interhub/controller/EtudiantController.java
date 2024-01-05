@@ -1,5 +1,3 @@
-package com.internhub.interhub.controller;
-
 import com.internhub.interhub.model.Etudiant;
 import com.internhub.interhub.repository.EtudiantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +21,7 @@ public class EtudiantController {
             List<Etudiant> students = etudiantRepository.findAll();
             return ResponseEntity.ok(students);
         } catch (Exception e) {
+            // Log the exception for future reference
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -34,7 +33,8 @@ public class EtudiantController {
             Etudiant savedStudent = etudiantRepository.save(etudiant);
             return ResponseEntity.status(HttpStatus.CREATED).body("Student added with ID: " + savedStudent.getId());
         } catch (Exception e) {
-            e.printStackTrace();
+
+            // Log the exception for future reference
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error adding student");
         }
     }
