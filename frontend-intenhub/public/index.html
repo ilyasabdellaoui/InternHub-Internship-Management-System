@@ -3,8 +3,24 @@
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <meta name="theme-color" content="#000000" />
+    <!-- CSS files -->
+    <link href="./assets/dist/css/tabler.min.css?1684106062" rel="stylesheet"/>
+    <link href="./assets/dist/css/tabler-flags.min.css?1684106062" rel="stylesheet"/>
+    <link href="./assets/dist/css/tabler-payments.min.css?1684106062" rel="stylesheet"/>
+    <link href="./assets/dist/css/tabler-vendors.min.css?1684106062" rel="stylesheet"/>
+    <link href="./assets/dist/css/demo.min.css?1684106062" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">    
+    <style>
+      :root {
+      	--tblr-font-sans-serif: 'Inter Var', -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+      }
+      body {
+      	font-feature-settings: "cv03", "cv04", "cv11";
+      }
+    </style>
     <meta
       name="description"
       content="Web site created using create-react-app"
@@ -28,7 +44,7 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <div id="root" style="height: 100%;"></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -39,5 +55,9 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <!-- Libs JS -->
+    <script src="./assets/dist/js/demo-theme.min.js?1684106062"></script>
+    <script src="./assets/dist/js/tabler.min.js?1684106062" defer></script>
+    <script src="./assets/dist/js/demo.min.js?1684106062" defer></script>
   </body>
 </html>
