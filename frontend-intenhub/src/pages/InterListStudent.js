@@ -12,7 +12,7 @@ export default function InterListStudent() {
       <Navbar nom="Ahmed Lazrak" fonction="Etudiant"/>
       <div className="h-100 page-wrapper">
         <PageHeader title="Mes stages" btnType="primary" btnText="+ Ajouter un stage" target="#new-internship"/>
-        <NewInternshipModal />
+        <NewInternshipModal studentId={26123}/>
         <TableStudent>
           <RowsStudent/>
         </TableStudent>
