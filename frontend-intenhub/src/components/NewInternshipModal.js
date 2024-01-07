@@ -1,8 +1,34 @@
-export default function NewInternshipModal() {
+import { useForm } from 'react-hook-form';
+
+export default function NewInternshipModal({studentId}) {
+  const promo = "20" + studentId.toString().substring(0, 2);
+  const currentYear = new Date().getFullYear();
+  var annee = currentYear - parseInt(promo);
+  switch(annee){
+    case 0:
+      annee = "3A";
+      break;
+    case 1:
+      annee = "2A";
+      break;
+    default:
+      annee = "1A";
+  }
+
+  // I have to send anneee + ordre to receive this
+  const dates = [{"dateDebut": "2023-3-12", "dateFin": "2023-4-12"}];
+
+  const {handleSubmit, setValue, register, formState : {errors}} = useForm();
+  function onSubmit(data) {
+    setValue("numero", "1");
+    // I have to send the post request here
+    console.log(data);
+  }
+
   return (
     <div className="modal modal-blur fade" id="new-internship" tabIndex={-1} aria-hidden="true" style={{display: 'none'}}>
     <div className="modal-dialog modal-lg modal-dialog-centered" role="document">
-      <form className="modal-content">
+      <form className="modal-content" onSubmit={handleSubmit(onSubmit)}>
         <div className="modal-header">
           <h5 className="modal-title">Nouveau stage</h5>
           <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
@@ -12,66 +38,71 @@ export default function NewInternshipModal() {
             <div className="col-lg-4">
               <div className="mb-3">
                 <label className="form-label">Date début</label>
-                <input type="text" name="dateDebut" className="form-control" disabled />
+                <input type="text" name="dateDebut" value={dates[0].dateDebut} className="form-control" disabled />
               </div>
             </div>
             <div className="col-lg-4">
               <div className="mb-3">
                 <label className="form-label">Date fin</label>
-                <input type="text" name="dateFin" className="form-control" disabled />
+                <input type="text" name="dateFin" value={dates[0].dateFin} className="form-control" disabled />
               </div>
             </div>
             <div className="col-lg-2">
               <div className="mb-3">
                 <label className="form-label">Année</label>
-                <input type="text" name="niveau" className="form-control" disabled />
+                <input type="text" value={annee} name="niveau" className="form-control" disabled />
               </div>
             </div>
             <div className="col-lg-2">
               <div className="mb-3">
                 <label className="form-label">Ordre</label>
-                <input type="text" name="numero" className="form-control" />
+                <input type="text" {...register("numero")} name="numero" defaultValue="1" className="form-control" disabled />
+                {annee !== "1A" && <select class="form-select" {...register("numero", {"required" : true})} name="numero">
+                  <option value="1">Premier</option>
+                  <option value="2">Deuxième</option>
+                </select>}
               </div>
             </div>
             <div className="col-lg-4">
               <div className="mb-3">
                 <label className="form-label">Nom entreprise</label>
-                <input type="text" name="entreprise" className="form-control" />
+                <input type="text" {...register("entreprise", {"required" : true})} name="entreprise" className="form-control" />
               </div>
             </div>
             <div className="col-lg-4">
               <div className="mb-3">
                 <label className="form-label">Ville entreprise</label>
-                <input type="text" name="villeEntreprise" className="form-control" />
+                <input type="text" {...register("villeEntreprise", {"required" : true})} name="villeEntreprise" className="form-control" />
               </div>
             </div>
             <div className="col-lg-4">
               <div className="mb-3">
                 <label className="form-label">Contact entreprise</label>
-                <input type="text" name="contactEntreprise" placeholder="Email ou GSM" className="form-control" />
+                <input type="text" {...register("contactEntreprise", {"required" : true})} name="contactEntreprise" placeholder="Email ou GSM" className="form-control" />
               </div>
             </div>
             <div className="col-lg-6">
               <div className="mb-3">
                 <label className="form-label">Encadrant entreprise</label>
-                <input type="text" name="enacdrantEntreprise" placeholder="Nom complet" className="form-control" />
+                <input type="text" {...register("enacdrantEntreprise", {"required" : true})} name="enacdrantEntreprise" placeholder="Nom complet" className="form-control" />
               </div>
             </div>
             <div className="col-lg-6">
               <div className="mb-3">
                 <label className="form-label">Contact encadrant</label>
-                <input type="text" name="contactEncadrant" placeholder="Email ou GSM" className="form-control" />
+                <input type="text" {...register("contactEncadrant", {"required" : true})} name="contactEncadrant" placeholder="Email ou GSM" className="form-control" />
               </div>
             </div>
           </div>
         </div>
         {/* En révision (can delete and update), Accepté, En cours, Achevé */}
         <div className="modal-footer">
-          <a href="/" className="btn btn-link link-secondary" data-bs-dismiss="modal">
+          <a href="/" className="btn btn-link link-secondary me-auto" data-bs-dismiss="modal">
             Annuler
           </a>
+          { Object.keys(errors).length > 0 && <div className="ms-auto"><p className='form-hint text-danger'>Erreur</p></div>}
           <div className="ms-auto">
-            <button type='submit' className="btn btn-success ms-2" data-bs-dismiss="modal">
+            <button type='submit' className="btn btn-success ms-2">
               Ajouter
             </button>
           </div>
