@@ -3,14 +3,14 @@ package com.internhub.interhub.model;
 import jakarta.persistence.*;
 import java.io.Serializable;
 
-class AquerirId implements Serializable {
+class AcquerirId implements Serializable {
     private Competence competence;
     private TypeStage typeStage;
 }
 
 @Entity
-@IdClass(AquerirId.class)
-public class Aquerir implements Serializable {
+@IdClass(AcquerirId.class)
+public class Acquerir implements Serializable {
     @Id
     @ManyToOne
     @JoinColumn(name = "code_competence", nullable = false)
@@ -24,10 +24,10 @@ public class Aquerir implements Serializable {
     @Column(name = "nv_exige", nullable = false)
     private int nvExige;
 
-    public Aquerir() {
+    public Acquerir() {
     }
 
-    public Aquerir(Competence competence, TypeStage typeStage, int nvExige) {
+    public Acquerir(Competence competence, TypeStage typeStage, int nvExige) {
         this.competence = competence;
         this.typeStage = typeStage;
         this.nvExige = nvExige;
