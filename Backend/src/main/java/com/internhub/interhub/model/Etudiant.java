@@ -8,190 +8,183 @@ public class Etudiant {
 
   // We should use this custom system -> ID = 2 last promo year + num_ds_promo
   @Id
-  @Column(unique = true, insertable = false, updatable = false)
-  private Integer id;
+  @Column(name = "num_etu", unique = true, insertable = false, updatable = false)
+  private int numEtu;
 
-  @Column(nullable = false)
-  private Integer annee_promo;
+  @ManyToOne
+  @JoinColumn(name = "annee_promo", nullable = false)
+  private Promo promo;
 
-  @Column(nullable = false)
-  private Integer num_ds_promo;
+  @Column(name = "num_ds_promo", nullable = false)
+  private int numDsPromo;
 
   // Custom method to set the ID before persisting the entity
   @PrePersist
   public void generateCustomId() {
     // ID = 2 last numbers in promo year + num_ds_promo
-    String yearSuffix = annee_promo.toString().substring(Math.max(0, annee_promo.toString().length() - 2));
-    id = Integer.parseInt(yearSuffix + num_ds_promo);
+    String yearSuffix = promo.getAnneePromo().toString().substring(Math.max(0, promo.getAnneePromo().toString().length() - 2));
+    numEtu = Integer.parseInt(yearSuffix + numDsPromo);
   }
 
-  @Enumerated(EnumType.STRING)
-  @Column(nullable = false)
-  private Qualite qualite_etu;
+  @Column(name = "qualite_etu", nullable = false)
+  private String qualiteEtu;
 
-  @Column(nullable = false)
-  private String nom_etu;
+  @Column(name = "code_postal_etu")
+  private int codePostalEtu;
 
-  @Column(nullable = false)
-  private String prenom_etu;
+  @Column(name = "date_naiss", nullable = false)
+  private Date dateNaiss;
 
-  @Column(nullable = false)
-  private String adresse_etu;
+  @Column(name = "mention", nullable = false)
+  private String mention;
 
-  @Column(nullable = true)
-  private String suite_etu;
+  @Column(name = "nom_etu", nullable = false)
+  private String nomEtu;
 
-  @Column(nullable = false, columnDefinition = "INT")
-  private Integer code_postal_etu;  
+  @Column(name = "prenom_etu", nullable = false)
+  private String prenomEtu;
 
-  @Column(nullable = false)
-  private String ville_etu;
+  @Column(name = "addresse_etu", nullable = false)
+  private String adresseEtu;
 
-  @Enumerated(EnumType.STRING)
-  @Column(nullable = false)
-  private Sexe sexe;
+  @Column(name = "sexe_etu", nullable = false)
+  private String sexeEtu;
 
-  @Column(nullable = false)
-  private Date date_naiss;
+  @Column(name = "suite_etu", nullable = false)
+  private String suiteEtu;
 
-  @Column(nullable = false)
-  private String tel_etu;
+  @Column(name = "tel_etu", nullable = false)
+  private String telEtu;
 
-  @Enumerated(EnumType.STRING)
-  @Column(nullable = true)
-  private Mention mention;
+  @Column(name = "ville_etu", nullable = false)
+  private String villeEtu;
 
-  public enum Qualite {
-    M,
-    Mlle,
-    Mme
+  public Etudiant() {
   }
 
-  public enum Sexe {
-    M,
-    F
-  }
-
-  public enum Mention {
-    Insuffisant,
-    Passable,
-    AssezBien,
-    Bien,
-    TresBien,
-    Excellent
+  public Etudiant(int numEtu, Promo promo, int numDsPromo, String qualiteEtu, int codePostalEtu, Date dateNaiss, String mention, String nomEtu, String prenomEtu, String adresseEtu, String sexeEtu, String suiteEtu, String telEtu, String villeEtu) {
+    this.numEtu = numEtu;
+    this.promo = promo;
+    this.numDsPromo = numDsPromo;
+    this.qualiteEtu = qualiteEtu;
+    this.codePostalEtu = codePostalEtu;
+    this.dateNaiss = dateNaiss;
+    this.mention = mention;
+    this.nomEtu = nomEtu;
+    this.prenomEtu = prenomEtu;
+    this.adresseEtu = adresseEtu;
+    this.sexeEtu = sexeEtu;
+    this.suiteEtu = suiteEtu;
+    this.telEtu = telEtu;
+    this.villeEtu = villeEtu;
   }
 
   // Getter Methods
-  public Integer getId() {
-    return id;
-  }
-  public Integer getAnnee_promo() {
-    return annee_promo;
+  public int getNumEtu() {
+    return numEtu;
   }
 
-  public Integer getNum_ds_promo() {
-    return num_ds_promo;
+  public Promo getPromo() {
+    return promo;
   }
 
-  public Qualite getQualite_etu() {
-    return qualite_etu;
+  public void setPromo(Promo promo) {
+    this.promo = promo;
   }
 
-  public String getNom_etu() {
-    return nom_etu;
+  public int getNumDsPromo() {
+    return numDsPromo;
   }
 
-  public String getPrenom_etu() {
-    return prenom_etu;
+  public void setNumDsPromo(int numDsPromo) {
+    this.numDsPromo = numDsPromo;
   }
 
-  public String getAdresse_etu() {
-    return adresse_etu;
+  public String getQualiteEtu() {
+    return qualiteEtu;
   }
 
-  public String getSuite_etu() {
-    return suite_etu;
+  public void setQualiteEtu(String qualiteEtu) {
+    this.qualiteEtu = qualiteEtu;
   }
 
-  public Integer getCode_postal_etu() {
-    return code_postal_etu;
+  public int getCodePostalEtu() {
+    return codePostalEtu;
   }
 
-  public String getVille_etu() {
-    return ville_etu;
+  public void setCodePostalEtu(int codePostalEtu) {
+    this.codePostalEtu = codePostalEtu;
   }
 
-  public Sexe getSexe() {
-    return sexe;
+  public Date getDateNaiss() {
+    return dateNaiss;
   }
 
-  public Date getDate_naiss() {
-    return date_naiss;
+  public void setDateNaiss(Date dateNaiss) {
+    this.dateNaiss = dateNaiss;
   }
 
-  public String getTel_etu() {
-    return tel_etu;
-  }
-
-  public Mention getMention() {
+  public String getMention() {
     return mention;
   }
 
-  // Setter Methods
-
-  public void setId(Integer id) {
-    this.id = id;
-  }
-
-  public void setAnnee_promo(Integer annee_promo) {
-    this.annee_promo = annee_promo;
-  }
-
-  public void setNum_ds_promo(Integer num_ds_promo) {
-    this.num_ds_promo = num_ds_promo;
-  }
-
-  public void setQualite_etu(Qualite qualite_etu) {
-    this.qualite_etu = qualite_etu;
-  }
-
-  public void setNom_etu(String nom_etu) {
-    this.nom_etu = nom_etu;
-  }
-
-  public void setPrenom_etu(String prenom_etu) {
-    this.prenom_etu = prenom_etu;
-  }
-
-  public void setAdresse_etu(String adresse_etu) {
-    this.adresse_etu = adresse_etu;
-  }
-
-  public void setSuite_etu(String suite_etu) {
-    this.suite_etu = suite_etu;
-  }
-
-  public void setCode_postal_etu(Integer code_postal_etu) {
-    this.code_postal_etu = code_postal_etu;
-  }
-
-  public void setVille_etu(String ville_etu) {
-    this.ville_etu = ville_etu;
-  }
-
-  public void setSexe(Sexe sexe) {
-    this.sexe = sexe;
-  }
-
-  public void setDate_naiss(Date date_naiss) {
-    this.date_naiss = date_naiss;
-  }
-
-  public void setTel_etu(String tel_etu) {
-    this.tel_etu = tel_etu;
-  }
-
-  public void setMention(Mention mention) {
+  public void setMention(String mention) {
     this.mention = mention;
+  }
+
+  public String getNomEtu() {
+    return nomEtu;
+  }
+
+  public void setNomEtu(String nomEtu) {
+    this.nomEtu = nomEtu;
+  }
+
+  public String getPrenomEtu() {
+    return prenomEtu;
+  }
+
+  public void setPrenomEtu(String prenomEtu) {
+    this.prenomEtu = prenomEtu;
+  }
+
+  public String getAdresseEtu() {
+    return adresseEtu;
+  }
+
+  public void setAdresseEtu(String adresseEtu) {
+    this.adresseEtu = adresseEtu;
+  }
+
+  public String getSexeEtu() {
+    return sexeEtu;
+  }
+
+  public void setSexeEtu(String sexeEtu) {
+    this.sexeEtu = sexeEtu;
+  }
+
+  public String getSuiteEtu() {
+    return suiteEtu;
+  }
+
+  public void setSuiteEtu(String suiteEtu) {
+    this.suiteEtu = suiteEtu;
+  }
+
+  public String getTelEtu() {
+    return telEtu;
+  }
+
+  public void setTelEtu(String telEtu) {
+    this.telEtu = telEtu;
+  }
+
+  public String getVilleEtu() {
+    return villeEtu;
+  }
+
+  public void setVilleEtu(String villeEtu) {
+    this.villeEtu = villeEtu;
   }
 }
