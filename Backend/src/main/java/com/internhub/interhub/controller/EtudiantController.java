@@ -1,8 +1,13 @@
 package com.internhub.interhub.controller;
 
 import com.internhub.interhub.model.Etudiant;
+import com.internhub.interhub.model.Promo;
+import com.internhub.interhub.model.Professeur;
 import com.internhub.interhub.repository.EtudiantRepository;
+import com.internhub.interhub.repository.PromoRepository;
+import com.internhub.interhub.repository.ProfesseurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,11 +16,37 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
-@RequestMapping("/students")
+@RequestMapping("/student")
 public class EtudiantController {
 
+    private final EtudiantRepository etudiantRepository;
+    private final PromoRepository promoRepository;
+    private final ProfesseurRepository professeurRepository;
+
     @Autowired
-    private EtudiantRepository etudiantRepository;
+    public EtudiantController(
+            EtudiantRepository etudiantRepository,
+            PromoRepository promoRepository,
+            ProfesseurRepository professeurRepository) {
+        this.etudiantRepository = etudiantRepository;
+        this.promoRepository = promoRepository;
+        this.professeurRepository = professeurRepository;
+    }
+
+    @PostMapping("/get")
+    public ResponseEntity<?> getStudent(@RequestParam int numEtu) {
+        try {
+            Etudiant student = etudiantRepository.findByNumEtu(numEtu);
+            if (student != null) {
+                return ResponseEntity.ok(student);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student with the given ID not found.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving student");
+        }
+    }
 
     @GetMapping("/getAll")
     public ResponseEntity<List<Etudiant>> getAllStudents() {
@@ -31,8 +62,15 @@ public class EtudiantController {
     @PostMapping("/add")
     public ResponseEntity<?> addStudent(@RequestBody Etudiant etudiant) {
         try {
-            Etudiant savedStudent = etudiantRepository.save(etudiant);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Student added with ID: " + savedStudent.getId());
+            Professeur professeur = etudiant.getPromo().getProfesseur();
+            Promo promo = etudiant.getPromo();
+
+            professeurRepository.save(professeur);
+            promoRepository.save(promo);
+            etudiantRepository.save(etudiant);
+            return ResponseEntity.status(HttpStatus.CREATED).body(etudiant.getNumEtu());
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Student with the given ID already exists.");
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error adding student");
