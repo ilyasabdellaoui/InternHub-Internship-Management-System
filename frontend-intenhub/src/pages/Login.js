@@ -18,6 +18,11 @@ export default function Login() {
             autoComplete="off"
             noValidate
           >
+          <select name="role">
+            <option value="etudiant">Etudiant</option>
+            <option value="professeur">Professeur</option>
+            <option value="administarateur">Administrateur</option>
+          </select>
             <div className="card-body text-center">
               <div className="mb-4">
                 <h2 className="card-title">Connectez vous</h2>
@@ -42,9 +47,9 @@ export default function Login() {
                   />
                 </div>
                 <div>
-                  <a href="/" className="btn btn-primary w-100">
+                  <button type="submit" href="/" className="btn btn-primary w-100">
                     Se connecter
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
