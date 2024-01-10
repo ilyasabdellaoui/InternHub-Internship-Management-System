@@ -5,5 +5,6 @@ import com.internhub.interhub.model.Etudiant;
 import java.util.*;
 
 public interface EtudiantRepository extends JpaRepository<Etudiant, Long> {
-  Etudiant findByid(Integer id);
+  Etudiant findByNumEtu(Integer numEtu);
+  boolean existsByNumEtu(Integer numEtu);
 }
