@@ -1,4 +1,4 @@
-export default function TableStudent({children}) {
+export default function TableManageStudent({children}) {
   return (
     <div className="page-body">
     <div className="container-xl">
@@ -8,12 +8,10 @@ export default function TableStudent({children}) {
           <table className="table">
             <thead>
               <tr>
-                <th>Date debut</th>
-                <th>Date fin</th>
-                <th>Entreprise</th>
-                <th>Niveau</th>
-                <th>Numéro</th>
-                <th>Statut</th>
+                <th>Identifiant</th>
+                <th>Promo</th>
+                <th>Nom</th>
+                <th>Prenom</th>
                 <th>Infos</th>
               </tr>
             </thead>

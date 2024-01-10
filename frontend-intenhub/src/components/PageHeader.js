@@ -1,4 +1,4 @@
-export default function PageHeader({title, btnType, btnText, target}) {
+export default function PageHeader({title, btnType="primary", btnText, target}) {
   return (
     <div className="page-header d-print-none">
     <div className="container-xl">
