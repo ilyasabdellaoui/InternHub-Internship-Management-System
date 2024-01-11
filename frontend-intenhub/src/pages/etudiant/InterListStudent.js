@@ -1,9 +1,9 @@
-import Footer from '../components/Footer';
-import NewInternshipModal from '../components/NewInternshipModal';
-import Navbar from '../components/Navbar';
-import PageHeader from '../components/PageHeader';
-import RowsStudent from '../components/RowsStudent';
-import TableStudent from '../components/TableStudent';
+import Footer from '../../components/Footer';
+import NewInternshipModal from '../../components/etudiant/NewInternshipModal';
+import Navbar from '../../components/Navbar';
+import PageHeader from '../../components/PageHeader';
+import RowsStudent from '../../components/etudiant/RowsStudent';
+import TableStudent from '../../components/etudiant/TableStudent';
 
 export default function InterListStudent() {
   return (
