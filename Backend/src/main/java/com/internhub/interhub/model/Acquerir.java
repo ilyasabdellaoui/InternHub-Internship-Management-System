@@ -2,10 +2,8 @@ package com.internhub.interhub.model;
 
 import jakarta.persistence.*;
 import java.io.Serializable;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+
+import lombok.*;
 
 class AcquerirId implements Serializable {
     private Competence competence;
@@ -14,19 +12,20 @@ class AcquerirId implements Serializable {
 
 @Entity
 @IdClass(AcquerirId.class)
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Acquerir implements Serializable {
     @Id
     @ManyToOne
-    @JoinColumn(name = "code_competence", nullable = false)
-    @Getter @Setter private Competence competence;
+    @JoinColumn(name = "code_competence")
+    private Competence competence;
 
     @Id
     @ManyToOne
-    @JoinColumn(name = "code_type", nullable = false)
-    @Getter @Setter private TypeStage typeStage;
+    @JoinColumn(name = "code_type")
+    private TypeStage typeStage;
 
     @Column(name = "nv_exige", nullable = false)
-    @Getter @Setter private Integer nvExige;
+    private Integer nvExige;
 }

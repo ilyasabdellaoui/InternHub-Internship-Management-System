@@ -16,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/acquerir")
+@CrossOrigin(origins = "http://localhost:3000")
 public class AcquerirController {
 
     private final AcquerirRepository acquerirRepository;
@@ -45,29 +46,31 @@ public class AcquerirController {
     @PostMapping("/add")
     public ResponseEntity<?> addAcquerir(@RequestBody Acquerir acquerir) {
         try {
-            // Creating Competence and TypeStage if not existing
             Competence competence = acquerir.getCompetence();
-            if (!competenceRepository.existsByCodeCompetence(competence.getCodeCompetence())) {
-                competenceRepository.save(competence);
-            }
             TypeStage typeStage = acquerir.getTypeStage();
-            if (!typeStageRepository.existsByCodeType(typeStage.getCodeType())) {
-                typeStageRepository.save(typeStage);
+            if (!competenceRepository.existsByCodeCompetence(competence.getCodeCompetence())){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error adding Acquerir record: Competence associated not found");
             }
-
-            // If exists, retrieve the managed entities, otherwise use the new instances
+            if (!typeStageRepository.existsByCodeType(typeStage.getCodeType())){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error adding Acquerir record: TypeStage associated not found");
+            }
             competence = competenceRepository.findByCodeCompetence(competence.getCodeCompetence());
             typeStage = typeStageRepository.findByCodeType(typeStage.getCodeType());
-
-            // Set the managed entities back to Acquerir
             acquerir.setCompetence(competence);
             acquerir.setTypeStage(typeStage);
 
-            if (acquerirRepository.existsByCompetenceAndTypeStage(competence, typeStage)) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body("Acquerir with the given competence and typeStage already exists.");
-            }
-
             acquerirRepository.save(acquerir);
+
+            /*
+            had code ki3ti stackOverFlow i know why but not how to fix it now
+
+            competence.addAcquerir(acquerir);
+            competenceRepository.save(competence);
+
+            typeStage.addAcquerir(acquerir);
+            typeStageRepository.save(typeStage);
+
+            */
             return ResponseEntity.status(HttpStatus.CREATED).body("Acquerir record added successfully.");
         } catch (DataIntegrityViolationException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Error adding Acquerir record: Duplicate key violation.");

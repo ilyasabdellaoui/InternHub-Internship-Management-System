@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/tutor")
+@CrossOrigin(origins = "http://localhost:3000")
 public class TuteurController {
 
     private final TuteurRepository tuteurRepository;
