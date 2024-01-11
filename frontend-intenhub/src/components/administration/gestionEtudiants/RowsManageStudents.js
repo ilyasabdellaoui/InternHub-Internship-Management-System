@@ -1,19 +1,7 @@
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import axios from "axios";
 
 export default function RowsManageStudent() {
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-  } = useForm();
-
-  function onSubmit(data) {
-    console.log(data);
-    window.location.href = "/";
-  }
-
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
@@ -81,6 +69,10 @@ export default function RowsManageStudent() {
                 Détails
               </button>
             </td>
+            {/* TO DO : Delete the Professeur record (by professeur.numProf) */}
+            <td className="ms-auto">
+              <a href="/" className="btn btn-danger w-100">Supprimer</a>
+            </td>
             <div
               className="modal modal-blur fade"
               id={`modal-${student.numEtu}`}
@@ -93,9 +85,7 @@ export default function RowsManageStudent() {
                 role="document"
               >
                 <form
-                  className="modal-content"
-                  onSubmit={handleSubmit(onSubmit)}
-                >
+                  className="modal-content">
                   <div className="modal-header">
                     <h5 className="modal-title">Détails étudiant</h5>
                     <button
@@ -109,53 +99,47 @@ export default function RowsManageStudent() {
                     <div className="row">
                       <div className="col-lg-4">
                         <div className="mb-3">
-                          <label className="form-label required">
+                          <label className="form-label">
                             Nom de l'étudiant
                           </label>
                           <input
                             type="text"
                             name="dateDebut"
                             defaultValue={student.nomEtu}
-                            {...register("nomEtu", { required: true })}
-                            className="form-control"
+                            className="form-control" disabled
                           />
                         </div>
                       </div>
                       <div className="col-lg-4">
                         <div className="mb-3">
-                          <label className="form-label required">
+                          <label className="form-label">
                             Prenom de l'étudiant
                           </label>
                           <input
                             type="text"
                             name="dateFin"
                             defaultValue={student.prenomEtu}
-                            {...register("prenomEtu", { required: true })}
-                            className="form-control"
+                            className="form-control" disabled
                           />
                         </div>
                       </div>
                       <div className="col-lg-2">
                         <div className="mb-3">
-                          <label className="form-label required">Promo</label>
+                          <label className="form-label">Promo</label>
                           <input
                             type="number"
                             defaultValue={student.promo.anneePromo}
-                            {...register("promo.anneePromo", {
-                              required: true,
-                            })}
-                            className="form-control"
+                            className="form-control" disabled
                           />
                         </div>
                       </div>
                       <div className="col-lg-2">
                         <div className="mb-3">
-                          <label className="form-label required">Sexe</label>
+                          <label className="form-label">Sexe</label>
                           <select
                             class="form-select"
                             defaultValue={student.sexeEtu}
-                            {...register("sexeEtu", { required: true })}
-                            name="numero"
+                            name="numero" disabled
                           >
                             <option value="M">M</option>
                             <option value="F">F</option>
@@ -170,8 +154,7 @@ export default function RowsManageStudent() {
                           <input
                             type="text"
                             defaultValue={student.dateNaiss}
-                            {...register("dateNaiss")}
-                            className="form-control"
+                            className="form-control" disabled
                           />
                         </div>
                       </div>
@@ -183,8 +166,7 @@ export default function RowsManageStudent() {
                           <input
                             type="text"
                             defaultValue={student.telEtu}
-                            {...register("telEtu")}
-                            className="form-control"
+                            className="form-control" disabled
                           />
                         </div>
                       </div>
@@ -196,8 +178,7 @@ export default function RowsManageStudent() {
                           <input
                             type="text"
                             defaultValue={student.villeEtu}
-                            {...register("villeEtu")}
-                            className="form-control"
+                            className="form-control" disabled
                           />
                         </div>
                       </div>
@@ -209,8 +190,7 @@ export default function RowsManageStudent() {
                           <input
                             type="text"
                             defaultValue={student.adresseEtu}
-                            {...register("adresseEtu")}
-                            className="form-control"
+                            className="form-control" disabled
                           />
                         </div>
                       </div>
@@ -220,8 +200,7 @@ export default function RowsManageStudent() {
                           <input
                             type="text"
                             defaultValue={student.suiteEtu}
-                            {...register("suiteEtu")}
-                            className="form-control"
+                            className="form-control" disabled
                           />
                         </div>
                       </div>
@@ -231,8 +210,7 @@ export default function RowsManageStudent() {
                           <input
                             type="text"
                             defaultValue={student.codePostalEtu}
-                            {...register("codePostalEtu")}
-                            className="form-control"
+                            className="form-control" disabled 
                           />
                         </div>
                       </div>
@@ -244,14 +222,12 @@ export default function RowsManageStudent() {
                           <textarea
                             type="text"
                             defaultValue={student.mention}
-                            {...register("mention")}
-                            className="form-control"
+                            className="form-control" disabled
                           />
                         </div>
                       </div>
                     </div>
                   </div>
-                  {/* En révision (can delete and update), Accepté, En cours, Achevé */}
                   <div className="modal-footer">
                     <a
                       href="/"
@@ -260,27 +236,6 @@ export default function RowsManageStudent() {
                     >
                       Annuler
                     </a>
-                    {Object.keys(errors).length > 0 && (
-                      <div className="ms-auto">
-                        <p className="form-hint text-danger">Erreur</p>
-                      </div>
-                    )}
-                    <div className="ms-auto">
-                      <a
-                        href="/"
-                        className="btn btn-danger"
-                        data-bs-dismiss="modal"
-                      >
-                        Supprimer
-                      </a>
-                      <button
-                        type="submit"
-                        className="btn btn-info ms-2"
-                        data-bs-dismiss="modal"
-                      >
-                        Enregistrer
-                      </button>
-                    </div>
                   </div>
                 </form>
               </div>
