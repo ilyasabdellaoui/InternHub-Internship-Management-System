@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/competence")
+@CrossOrigin(origins = "http://localhost:3000")
 public class CompetenceController {
 
     private final CompetenceRepository competenceRepository;
@@ -21,7 +22,7 @@ public class CompetenceController {
     }
 
     @PostMapping("/get")
-    public ResponseEntity<?> getCompetence(@RequestParam String codeCompetence) {
+    public ResponseEntity<?> getCompetence(@RequestParam int codeCompetence) {
         try {
             Competence competence = competenceRepository.findByCodeCompetence(codeCompetence);
             if (competence != null) {
@@ -49,9 +50,6 @@ public class CompetenceController {
     @PostMapping("/add")
     public ResponseEntity<?> addCompetence(@RequestBody Competence competence) {
         try {
-            if (competenceRepository.existsByCodeCompetence(competence.getCodeCompetence())) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body("Competence with the given code already exists.");
-            }
             competenceRepository.save(competence);
             return ResponseEntity.status(HttpStatus.CREATED).body(competence.getCodeCompetence());
         } catch (Exception e) {
