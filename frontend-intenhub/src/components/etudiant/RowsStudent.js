@@ -42,13 +42,18 @@ export default function RowsStudent() {
         <td className="sort-date-fin" data-date={Math.floor(new Date(internship.dateFin).getTime() / 1000)}>
           {internship.dateFin}
         </td>
-        <td className="sort-entreprise">{internship.entreprise}</td>
-        <td className="sort-niveau">{internship.niveau}</td>
-        <td className="sort-num">{internship.numero}</td>
-        <td className="sort-statut">{internship.statut}</td>
+        <td>{internship.entreprise}</td>
+        <td>{internship.niveau}</td>
+        <td>{internship.numero}</td>
+        <td>{internship.statut}</td>
         <td><button className="btn btn-warning w-100" data-bs-toggle="modal" data-bs-target={`#modal-${internship.idStage}`}>
             Détails
         </button></td>
+        {/* TO DO : Delete the intetrnship record (by internship.idStage) */}
+        { internship.statut === "En révision" && 
+        <td className="ms-auto">
+          <a href="/" className="btn btn-danger" data-bs-dismiss="modal">Supp.</a>
+        </td> }
         <div className="modal modal-blur fade" id={`modal-${internship.idStage}`} tabIndex={-1} aria-hidden="true" style={{display: 'none'}}>
           <div className="modal-dialog modal-lg modal-dialog-centered" role="document">
             <form className="modal-content">
@@ -73,43 +78,43 @@ export default function RowsStudent() {
                   <div className="col-lg-2">
                     <div className="mb-3">
                       <label className="form-label">Année</label>
-                      <input type="text" value={internship.niveau} className="form-control" disabled />
+                      <input type="text" value={internship.niveau} className="form-control" disabled/>
                     </div>
                   </div>
                   <div className="col-lg-2">
                     <div className="mb-3">
                       <label className="form-label">Ordre</label>
-                      <input type="text" value={internship.numero} className="form-control" />
+                      <input type="text" value={internship.numero} className="form-control" disabled />
                     </div>
                   </div>
                   <div className="col-lg-4">
                     <div className="mb-3">
                       <label className="form-label">Nom entreprise</label>
-                      <input type="text" value={internship.entreprise} className="form-control" />
+                      <input type="text" value={internship.entreprise} className="form-control" disabled />
                     </div>
                   </div>
                   <div className="col-lg-4">
                     <div className="mb-3">
                       <label className="form-label">Ville entreprise</label>
-                      <input type="text" value={internship.villeEntreprise} className="form-control" />
+                      <input type="text" value={internship.villeEntreprise} className="form-control" disabled />
                     </div>
                   </div>
                   <div className="col-lg-4">
                     <div className="mb-3">
                       <label className="form-label">Contact entreprise</label>
-                      <input type="text" value={internship.contactEntreprise} placeholder="Email ou GSM" className="form-control" />
+                      <input type="text" value={internship.contactEntreprise} placeholder="Email ou GSM" className="form-control" disabled />
                     </div>
                   </div>
                   <div className="col-lg-6">
                     <div className="mb-3">
                       <label className="form-label">Encadrant entreprise</label>
-                      <input type="text" value={internship.enacdrantEntreprise} placeholder="Nom complet" className="form-control" />
+                      <input type="text" value={internship.enacdrantEntreprise} placeholder="Nom complet" className="form-control" disabled />
                     </div>
                   </div>
                   <div className="col-lg-6">
                     <div className="mb-3">
                       <label className="form-label">Contact encadrant</label>
-                      <input type="text" value={internship.contactEncadrant} placeholder="Email ou GSM" className="form-control" />
+                      <input type="text" value={internship.contactEncadrant} placeholder="Email ou GSM" className="form-control" disabled />
                     </div>
                   </div>
                   <div className="col-lg-6">
@@ -118,27 +123,12 @@ export default function RowsStudent() {
                       <input type="text" value={internship.profEncadrant} disabled className="form-control" />
                     </div>
                   </div>
-                  <div className="col-lg-6">
-                    <div className="mb-3">
-                      <label className="form-label">Convention</label>
-                      <a href="/" className="btn btn-success w-100">Télécharger convention</a>
-                    </div>
-                  </div>
                 </div>
               </div>
-              {/* En révision (can delete and update), Accepté, En cours, Achevé */}
               <div className="modal-footer">
                 <a href="/" className="btn btn-link link-secondary" data-bs-dismiss="modal">
                   Annuler
                 </a>
-                { internship.statut === "En révision" && <div className="ms-auto">
-                  <a href="/" className="btn btn-danger" data-bs-dismiss="modal">
-                    Supprimer
-                  </a>
-                  <button type='submit' className="btn btn-info ms-2" data-bs-dismiss="modal">
-                    Enregistrer
-                  </button>
-                </div>}
               </div>
             </form>
           </div>

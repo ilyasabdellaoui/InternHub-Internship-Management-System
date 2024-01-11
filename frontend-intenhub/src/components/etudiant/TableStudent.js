@@ -15,6 +15,7 @@ export default function TableStudent({children}) {
                 <th>Numéro</th>
                 <th>Statut</th>
                 <th>Infos</th>
+                <th>Supprimer</th>
               </tr>
             </thead>
               {children}

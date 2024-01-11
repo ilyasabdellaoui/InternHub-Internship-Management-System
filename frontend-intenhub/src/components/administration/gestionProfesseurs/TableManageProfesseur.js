@@ -9,7 +9,6 @@ export default function TableManageStudent({children}) {
             <thead>
               <tr>
                 <th>Identifiant</th>
-                <th>Promo</th>
                 <th>Nom</th>
                 <th>Prenom</th>
                 <th>Infos</th>
