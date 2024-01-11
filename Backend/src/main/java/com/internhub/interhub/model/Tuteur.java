@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @NoArgsConstructor
@@ -12,6 +13,8 @@ import lombok.AllArgsConstructor;
 public class Tuteur {
     @Id
     @Column(name = "num_tut")
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Getter @Setter private String numTut;
 
     @Column(name = "qualite_tut")
