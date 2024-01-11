@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/typestage")
+@CrossOrigin(origins = "http://localhost:3000")
 public class TypeStageController {
 
     private final TypeStageRepository typeStageRepository;
@@ -21,7 +22,7 @@ public class TypeStageController {
     }
 
     @PostMapping("/get")
-    public ResponseEntity<?> getTypeStage(@RequestParam int codeType) {
+    public ResponseEntity<?> getTypeStage(@RequestParam long codeType) {
         try {
             TypeStage typeStage = typeStageRepository.findByCodeType(codeType);
             if (typeStage != null) {
@@ -49,9 +50,6 @@ public class TypeStageController {
     @PostMapping("/add")
     public ResponseEntity<?> addTypeStage(@RequestBody TypeStage typeStage) {
         try {
-            if (typeStageRepository.existsByCodeType(typeStage.getCodeType())) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body("TypeStage with the given code already exists.");
-            }
             typeStageRepository.save(typeStage);
             return ResponseEntity.status(HttpStatus.CREATED).body(typeStage.getCodeType());
         } catch (Exception e) {

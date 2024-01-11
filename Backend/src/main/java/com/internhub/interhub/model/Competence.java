@@ -1,22 +1,42 @@
 package com.internhub.interhub.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import lombok.*;
 
 @Entity
+@Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Competence {
     @Id
     @Column(name = "code_competence")
-    @Getter @Setter private String codeCompetence;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int codeCompetence;
 
     @Column(name = "libelle", nullable = false)
-    @Getter @Setter private String libelle;
+    private String libelle;
 
     @Column(name = "description")
-    @Getter @Setter private String description;
+    private String description;
+
+    @OneToMany(mappedBy = "competence", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private Set<Acquerir> acquerir = new HashSet<>();
+
+    public Competence(String libelle, String description){
+        this.libelle = libelle;
+        this.description = description;
+    }
+
+    public void addAcquerir(Acquerir acquerir) {
+        this.acquerir.add(acquerir);
+        acquerir.setCompetence(this);
+    }
+
+    public void removeAcquerir(Acquerir acquerir) {
+        this.acquerir.remove(acquerir);
+        acquerir.setCompetence(null);
+    }
 }

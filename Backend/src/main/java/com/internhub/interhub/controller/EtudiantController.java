@@ -20,10 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.time.Year;
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/student")
-
 @CrossOrigin(origins = "http://localhost:3000")
 public class EtudiantController {
 

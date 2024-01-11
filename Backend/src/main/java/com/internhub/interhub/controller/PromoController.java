@@ -21,7 +21,6 @@ public class PromoController {
     private final PromoRepository promoRepository;
     private final ProfesseurRepository professeurRepository;
 
-    @Autowired
     public PromoController(ProfesseurRepository professeurRepository, PromoRepository promoRepository) {
         this.professeurRepository = professeurRepository;
         this.promoRepository = promoRepository;

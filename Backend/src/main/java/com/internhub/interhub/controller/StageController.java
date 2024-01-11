@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/stage")
+@CrossOrigin(origins = "http://localhost:3000")
 public class StageController {
 
     private final ProfesseurRepository professeurRepository;
