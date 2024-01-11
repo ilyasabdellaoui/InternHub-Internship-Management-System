@@ -8,14 +8,13 @@ export default function TableProfesseur({children}) {
           <table className="table">
             <thead>
               <tr>
+                <th>Nom de l'étudiant</th>
                 <th>Date debut</th>
                 <th>Date fin</th>
                 <th>Entreprise</th>
                 <th>Niveau</th>
                 <th>Numéro</th>
-                <th>Statut</th>
                 <th>Infos</th>
-                <th>Supprimer</th>
               </tr>
             </thead>
               {children}
