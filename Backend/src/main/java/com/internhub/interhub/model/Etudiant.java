@@ -15,14 +15,14 @@ public class Etudiant {
   // We should use this custom system -> ID = 2 last promo year + num_ds_promo
   @Id
   @Column(name = "num_etu", unique = true, insertable = false, updatable = false)
-  @Getter private int numEtu;
+  @Getter private Integer numEtu;
 
   @ManyToOne
   @JoinColumn(name = "annee_promo", nullable = false)
   @Getter @Setter private Promo promo;
 
   @Column(name = "num_ds_promo", nullable = false)
-  @Getter @Setter private int numDsPromo;
+  @Getter @Setter private Integer numDsPromo;
 
   // Custom method to set the ID before persisting the entity
   @PrePersist
@@ -48,7 +48,7 @@ public class Etudiant {
   @Getter @Setter private String suiteEtu;
 
   @Column(name = "code_postal_etu")
-  @Getter @Setter private int codePostalEtu;
+  @Getter @Setter private Integer codePostalEtu;
 
   @Column(name = "ville_etu")
   @Getter @Setter private String villeEtu;

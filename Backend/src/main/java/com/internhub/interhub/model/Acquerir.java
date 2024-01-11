@@ -28,5 +28,5 @@ public class Acquerir implements Serializable {
     @Getter @Setter private TypeStage typeStage;
 
     @Column(name = "nv_exige", nullable = false)
-    @Getter @Setter private int nvExige;
+    @Getter @Setter private Integer nvExige;
 }

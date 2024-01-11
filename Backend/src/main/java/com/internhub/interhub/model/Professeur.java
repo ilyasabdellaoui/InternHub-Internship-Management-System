@@ -28,7 +28,7 @@ public class Professeur {
     @Getter @Setter private String adresseProf;
 
     @Column(name = "code_postal_prof")
-    @Getter @Setter private int codePostalProf;
+    @Getter @Setter private Integer codePostalProf;
 
     @Column(name = "tel_ecole_prof")
     @Getter @Setter private String telEcoleProf;

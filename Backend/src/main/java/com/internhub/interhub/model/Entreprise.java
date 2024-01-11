@@ -28,7 +28,7 @@ public class Entreprise {
     @Getter @Setter private String suiteEntr;
 
     @Column(name = "code_postal_entr")
-    @Getter @Setter private int codePostalEntr;
+    @Getter @Setter private Integer codePostalEntr;
 
     @Column(name = "ville_entr")
     @Getter @Setter private String villeEntr;

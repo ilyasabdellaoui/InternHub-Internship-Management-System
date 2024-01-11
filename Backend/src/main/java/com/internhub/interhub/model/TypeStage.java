@@ -12,8 +12,8 @@ import lombok.AllArgsConstructor;
 public class TypeStage {
     @Id
     @Column(name = "code_type")
-    @Getter @Setter private int codeType;
+    @Getter @Setter private Integer codeType;
 
     @Column(name = "nb_sem", nullable = false)
-    @Getter @Setter private int nbSem;
+    @Getter @Setter private Integer nbSem;
 }
