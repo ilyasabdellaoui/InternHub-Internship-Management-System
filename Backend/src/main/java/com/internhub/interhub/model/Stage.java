@@ -17,7 +17,7 @@ public class Stage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "num_stage", unique = true)
-    @Getter @Setter private int numStage;
+    @Getter @Setter private Integer numStage;
 
     @ManyToOne
     @JoinColumn(name = "num_etu", nullable = false)

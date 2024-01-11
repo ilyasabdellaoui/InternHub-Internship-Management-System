@@ -17,10 +17,10 @@ public class Promo {
     @Getter @Setter private Year anneePromo;
 
     @Column(name = "nb_inscrits")
-    @Getter @Setter private int nbInscrits;
+    @Getter @Setter private Integer nbInscrits;
 
     @Column(name = "nb_recus")
-    @Getter @Setter private int nbRecus;
+    @Getter @Setter private Integer nbRecus;
 
     @OneToOne
     @JoinColumn(name = "num_prof", nullable = false, unique = true)
