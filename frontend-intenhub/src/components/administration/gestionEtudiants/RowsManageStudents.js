@@ -25,12 +25,15 @@ export default function RowsManageStudent() {
         const uniqueStudents = Array.from(
           new Set(
             response.data.map((student) => ({
-              numEtu: student.numEtu,
-              promo: {
-                anneePromo: student.promo.anneePromo,
-              },
-              nomEtu: student.nomEtu,
-              prenomEtu: student.prenomEtu,
+              ...student,
+              dateNaiss: new Date(student.dateNaiss).toLocaleDateString(
+                "fr-FR",
+                {
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                }
+              ),
             }))
           )
         );
@@ -63,6 +66,11 @@ export default function RowsManageStudent() {
                 Détails
               </button>
             </td>
+            <td className="ms-auto">
+              <a href="/" className="btn btn-danger w-100">
+                Supprimer
+              </a>
+            </td>
 
             <div
               className="modal modal-blur fade"
@@ -81,6 +89,7 @@ export default function RowsManageStudent() {
                 >
                   <div className="modal-header">
                     <h5 className="modal-title">Détails étudiant</h5>
+
                     <button
                       type="button"
                       className="btn-close"
@@ -101,6 +110,7 @@ export default function RowsManageStudent() {
                             defaultValue={student.nomEtu}
                             {...register("nomEtu", { required: true })}
                             className="form-control"
+                            disabled
                           />
                         </div>
                       </div>
@@ -115,6 +125,7 @@ export default function RowsManageStudent() {
                             defaultValue={student.prenomEtu}
                             {...register("prenomEtu", { required: true })}
                             className="form-control"
+                            disabled
                           />
                         </div>
                       </div>
@@ -123,6 +134,7 @@ export default function RowsManageStudent() {
                           <label className="form-label required">Promo</label>
                           <input
                             type="number"
+                            disabled
                             defaultValue={student.promo.anneePromo}
                             {...register("promo.anneePromo", {
                               required: true,
@@ -139,6 +151,7 @@ export default function RowsManageStudent() {
                             defaultValue={student.qualiteEtu}
                             {...register("qualiteEtu", { required: true })}
                             name="numero"
+                            disabled
                           >
                             <option value="M">M</option>
                             <option value="F">F</option>
@@ -155,6 +168,7 @@ export default function RowsManageStudent() {
                             defaultValue={student.dateNaiss}
                             {...register("dateNaiss")}
                             className="form-control"
+                            disabled
                           />
                         </div>
                       </div>
@@ -168,6 +182,7 @@ export default function RowsManageStudent() {
                             defaultValue={student.telEtu}
                             {...register("telEtu")}
                             className="form-control"
+                            disabled
                           />
                         </div>
                       </div>
@@ -181,6 +196,7 @@ export default function RowsManageStudent() {
                             defaultValue={student.villeEtu}
                             {...register("villeEtu")}
                             className="form-control"
+                            disabled
                           />
                         </div>
                       </div>
@@ -194,6 +210,7 @@ export default function RowsManageStudent() {
                             defaultValue={student.adresseEtu}
                             {...register("adresseEtu")}
                             className="form-control"
+                            disabled
                           />
                         </div>
                       </div>
@@ -205,6 +222,7 @@ export default function RowsManageStudent() {
                             defaultValue={student.suiteEtu}
                             {...register("suiteEtu")}
                             className="form-control"
+                            disabled
                           />
                         </div>
                       </div>
@@ -216,6 +234,7 @@ export default function RowsManageStudent() {
                             defaultValue={student.codePostalEtu}
                             {...register("codePostalEtu")}
                             className="form-control"
+                            disabled
                           />
                         </div>
                       </div>
@@ -229,6 +248,7 @@ export default function RowsManageStudent() {
                             defaultValue={student.mention}
                             {...register("mention")}
                             className="form-control"
+                            disabled
                           />
                         </div>
                       </div>
