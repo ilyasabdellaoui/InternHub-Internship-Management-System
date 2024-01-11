@@ -1,6 +1,6 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import axios, { Axios } from "axios";
+import axios from "axios";
 
 export default function NewStudentModal() {
   const {
@@ -9,28 +9,41 @@ export default function NewStudentModal() {
     formState: { errors },
   } = useForm();
 
-  const propositionPromo = new Date().getFullYear() + 3;
+  const [promoList, setPromoList] = useState([]);
+
+  // const propositionPromo = new Date().getFullYear() + 3;
   const annulerRef = useRef(null);
 
-  function onSubmit(data) {
-    const d = {
-      promo: {
-        anneePromo: "2025",
-        professeur: {
-          numProf: "P3",
-          genreProf: "M",
-          nomProf: "EL Asri",
-          prenomProf: "Bouchra",
-        },
-      },
-      numDsPromo: 12,
-      qualiteEtu: "M",
-      nomEtu: "bnflan",
-      prenomEtu: "flan",
+  useEffect(() => {
+    const fetchData = async () => {
+      axios.get("http://localhost:8080/promo/getAll").then((res) => {
+        res.data.map((promo) => {
+          setPromoList((promoList) => [...promoList, promo.anneePromo]);
+          setPromoList((promoList) => [...new Set(promoList)]);
+        });
+      });
     };
+    fetchData();
+    promoList && console.log(promoList);
+  }, []);
 
-    // console.log(data);
-    axios.post("http://localhost:8080/student/add", d).then((res) => {
+  function onSubmit(data) {
+    // const d = {
+    //   promo: {
+    //     anneePromo: "2025",
+    //   },
+    //   numDsPromo: "18",
+    //   qualiteEtu: "M",
+    //   nomEtu: "bn9lan",
+    //   prenomEtu: "flan",
+    //   codePostalEtu: "20210",
+    //   dateNaiss: "2002-03-03",
+    //   mention: "ins",
+    //   telEtu: "0601020304",
+    // };
+    data["numDsPromo"] = "57";
+    console.log(data);
+    axios.post("http://localhost:8080/student/add", data).then((res) => {
       console.log(res.data);
     });
     annulerRef.current.click();
@@ -89,12 +102,27 @@ export default function NewStudentModal() {
               <div className="col-lg-2">
                 <div className="mb-3">
                   <label className="form-label required">Promo</label>
-                  <input
-                    type="number"
-                    defaultValue={propositionPromo}
+                  {promoList && promoList.length > 0 && (
+                    <input
+                      type="number"
+                      defaultValue={Math.min(...promoList)}
+                      {...register("promo.anneePromo", { required: true })}
+                      className="form-control"
+                      min={Math.min(...promoList)}
+                      max={Math.max(...promoList)}
+                    />
+                  )}
+                  {/* <select
+                    class="form-select"
                     {...register("promo.anneePromo", { required: true })}
-                    className="form-control"
-                  />
+                    name="anneePromo"
+                  >
+                    {promoList &&
+                      promoList.length > 0 &&
+                      promoList.map((promo) => (
+                        <option value={promo}>{promo}</option>
+                      ))}
+                  </select> */}
                 </div>
               </div>
               <div className="col-lg-2">
