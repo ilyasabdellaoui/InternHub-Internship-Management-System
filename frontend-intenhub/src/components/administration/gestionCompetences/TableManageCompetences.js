@@ -1,4 +1,4 @@
-export default function TableManageStudent({children}) {
+export default function TableManageCompetences({children}) {
   return (
     <div className="page-body">
     <div className="container-xl">
@@ -8,9 +8,9 @@ export default function TableManageStudent({children}) {
           <table className="table">
             <thead>
               <tr>
-                <th>Identifiant</th>
-                <th>Nom</th>
-                <th>Prenom</th>
+                <th>Code</th>
+                <th>Label</th>
+                <th>Description</th>
                 <th>Infos</th>
                 <th>Supprimer</th>
               </tr>

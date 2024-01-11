@@ -15,7 +15,7 @@ export default function NewStudentModal() {
     <div className="modal-dialog modal-lg modal-dialog-centered" role="document">
       <form className="modal-content" onSubmit={handleSubmit(onSubmit)}>
         <div className="modal-header">
-          <h5 className="modal-title required">Nouveau étudiant</h5>
+          <h5 className="modal-title required">Nouveau Professeur</h5>
           <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close" />
         </div>
         <div className="modal-body"> 
@@ -28,7 +28,7 @@ export default function NewStudentModal() {
               </div>
               <div className="col-lg-4">
                 <div className="mb-3">
-                  <label className="form-label required">Prenom de l'étudiant</label>
+                  <label className="form-label required">Prenom du professeur</label>
                   <input type="text"  {...register("prenomProf", {"required" : true})} className="form-control" />
                 </div>
               </div>
