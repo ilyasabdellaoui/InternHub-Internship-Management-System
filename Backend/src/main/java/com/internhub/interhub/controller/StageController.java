@@ -63,39 +63,28 @@ public class StageController {
     @PostMapping("/add")
     public ResponseEntity<?> addStage(@RequestBody Stage stage) {
         try {
-            // Check if associated entities exist before saving
-            Professeur professeur = stage.getProfesseur();
-            if (!professeurRepository.existsByNumProf(stage.getProfesseur().getNumProf())) {
-                professeurRepository.save(professeur);
-            }
             Etudiant etudiant = stage.getEtudiant();
-            if (!etudiantRepository.existsByNumEtu(etudiant.getNumEtu())) {
-                etudiantRepository.save(etudiant);
+            int numEtu = etudiant.getNumEtu();
+            if(!etudiantRepository.existsByNumEtu(numEtu)){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student with the given ID not found");
             }
+
+            Professeur professeur = stage.getProfesseur();
+            String numProf = professeur.getNumProf();
+            if(!professeurRepository.existsByNumProf(numProf)){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Professor with the given ID not found");
+            }
+
             Tuteur tuteur = stage.getTuteur();
-            if (!tuteurRepository.existsByNumTut(tuteur.getNumTut())) {
-                tuteurRepository.save(tuteur);
+            String numTut = tuteur.getNumTut();
+            if(!tuteurRepository.existsByNumTut(numTut)){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tutor with the given ID not found");
             }
+
             TypeStage typeStage = stage.getTypeStage();
-            if (!typeStageRepository.existsByCodeType(typeStage.getCodeType())) {
-                typeStageRepository.save(typeStage);
-            }
-
-            // If exists, retrieve the managed entities, otherwise use the new instances
-            professeur = professeurRepository.findByNumProf(stage.getProfesseur().getNumProf());
-            etudiant = etudiantRepository.findByNumEtu(stage.getEtudiant().getNumEtu());
-            tuteur = tuteurRepository.findByNumTut(stage.getTuteur().getNumTut());
-            typeStage = typeStageRepository.findByCodeType(stage.getTypeStage().getCodeType());
-
-            // Set the managed entities back to Stage
-            stage.setProfesseur(professeur);
-            stage.setEtudiant(etudiant);
-            stage.setTuteur(tuteur);
-            stage.setTypeStage(typeStage);
-
-            // Check if Stage with the given number already exists
-            if (stageRepository.existsByNumStage(stage.getNumStage())) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body("Stage with the given number already exists.");
+            long codeType = typeStage.getCodeType();
+            if(!typeStageRepository.existsByCodeType(codeType)){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("TypeStage with the given ID not found");
             }
 
             // Save the Stage
