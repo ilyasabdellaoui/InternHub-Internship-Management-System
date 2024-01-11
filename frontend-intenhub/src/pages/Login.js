@@ -1,9 +1,28 @@
-import React from "react";
-import largeLogo from '../images/largeLogo2.png';
+import { useState } from "react";
+import largeLogo from "../images/largeLogo2.png";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const [role, setRole] = useState("etudiant");
+  const navigate = useNavigate();
+
+  function handleClick(e) {
+    e.preventDefault();
+    console.log(role);
+    if (role === "etudiant") {
+      navigate("/etudiant/stages");
+    } else if (role === "professeur") {
+      navigate("/professeur/stages");
+    } else if (role === "administrateur") {
+      navigate("/admin/etudiants");
+    }
+  }
+
   return (
-    <div className="h-100 d-flex flex-column" style={{fontFamily: "var(--tblr-body-font-family)"}}>
+    <div
+      className="h-100 d-flex flex-column"
+      style={{ fontFamily: "var(--tblr-body-font-family)" }}
+    >
       <div className="h-100 page page-center">
         <div className="container container-tight py-4">
           <div className="text-center mb-4">
@@ -18,11 +37,11 @@ export default function Login() {
             autoComplete="off"
             noValidate
           >
-          <select name="role">
-            <option value="etudiant">Etudiant</option>
-            <option value="professeur">Professeur</option>
-            <option value="administarateur">Administrateur</option>
-          </select>
+            <select name="role" onChange={(e) => setRole(e.target.value)}>
+              <option value="etudiant">Etudiant</option>
+              <option value="professeur">Professeur</option>
+              <option value="administrateur">Administrateur</option>
+            </select>
             <div className="card-body text-center">
               <div className="mb-4">
                 <h2 className="card-title">Connectez vous</h2>
@@ -47,7 +66,11 @@ export default function Login() {
                   />
                 </div>
                 <div>
-                  <button type="submit" href="/" className="btn btn-primary w-100">
+                  <button
+                    type="submit"
+                    onClick={handleClick}
+                    className="btn btn-primary w-100"
+                  >
                     Se connecter
                   </button>
                 </div>

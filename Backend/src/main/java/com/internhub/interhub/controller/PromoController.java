@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/promo")
+@CrossOrigin(origins = "http://localhost:3000")
 public class PromoController {
 
     private final PromoRepository promoRepository;

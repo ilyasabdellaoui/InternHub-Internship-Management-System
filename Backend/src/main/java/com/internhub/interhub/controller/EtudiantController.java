@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.internhub.interhub.model.Etudiant;
-import com.internhub.interhub.repository.EtudiantRepository;
+import java.time.Year;
+import java.util.List;
 
 
 @RestController
@@ -70,11 +70,11 @@ public class EtudiantController {
     @PostMapping("/add")
     public ResponseEntity<?> addStudent(@RequestBody Etudiant etudiant) {
         try {
-            Professeur professeur = etudiant.getPromo().getProfesseur();
             Promo promo = etudiant.getPromo();
-
-            professeurRepository.save(professeur);
-            promoRepository.save(promo);
+            Year anneePromo = promo.getAnneePromo();
+            if (!promoRepository.existsByAnneePromo(anneePromo)){
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Promo with the given year not found");
+            }
             etudiantRepository.save(etudiant);
             return ResponseEntity.status(HttpStatus.CREATED).body(etudiant.getNumEtu());
         } catch (DataIntegrityViolationException e) {
