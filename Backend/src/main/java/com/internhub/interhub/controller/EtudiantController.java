@@ -20,9 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.internhub.interhub.model.Etudiant;
 import com.internhub.interhub.repository.EtudiantRepository;
 
-@CrossOrigin(origins = "http://localhost:8081")
+
 @RestController
 @RequestMapping("/student")
+
+@CrossOrigin(origins = "http://localhost:3000")
 public class EtudiantController {
 
     private final EtudiantRepository etudiantRepository;
