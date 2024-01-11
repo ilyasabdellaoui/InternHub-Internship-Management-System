@@ -1,9 +1,12 @@
 import React from 'react'
 
 export default function RowsProfesseur() {
+  // Here send the prof identifier to fetch relates internships
   const internships = [
     {
       "idStage": 123,
+      "nomEtu" : "Said",
+      "prenomEtu" : "Najim",
       "dateDebut": "2023-01-02",
       "dateFin": "2024-01-02",
       "entreprise" : "Intenhub",
@@ -11,13 +14,13 @@ export default function RowsProfesseur() {
       "contactEntreprise" : "06xxxxxxxx",
       "enacdrantEntreprise" : "Ilyas ABDELLAOUI",
       "contactEncadrant" : "ilyasabdellaoui@pro.ma", 
-      "profEncadrant" : "Karim SBAINA",
       "niveau" : "2A",
-      "numero" : "1er",
-      "statut" : "En révision"
+      "numero" : "1er"
     },
     {
       "idStage": 1234,
+      "nomEtu" : "Ilyas",
+      "prenomEtu" : "Abdellaoui",
       "dateDebut": "2025-01-02",
       "dateFin": "2026-01-02",
       "entreprise" : "Good",
@@ -25,7 +28,6 @@ export default function RowsProfesseur() {
       "contactEntreprise" : "06xxxxxxxx",
       "enacdrantEntreprise" : "Ilyas ABDELLAOUI",
       "contactEncadrant" : "ilyasabdellaoui@pro.ma", 
-      "profEncadrant" : "Karim SBAINA",
       "niveau" : "1A",
       "numero" : "2ème",
       "statut" : "En cours"   
@@ -36,6 +38,7 @@ export default function RowsProfesseur() {
       {internships.map((internship) => (
         <tr className="align-middle" key={internship.idStage}>
         {/* Lharba: this is UNIX timestamp = sec elapsed since Jan 1, 1970 (the Unix epoch) */}
+        <td> {internship.nomEtu} {internship.prenomEtu} </td>
         <td className="sort-date-debut" data-date={Math.floor(new Date(internship.dateDebut).getTime() / 1000)}>
           {internship.dateDebut}
         </td>
@@ -45,15 +48,9 @@ export default function RowsProfesseur() {
         <td>{internship.entreprise}</td>
         <td>{internship.niveau}</td>
         <td>{internship.numero}</td>
-        <td>{internship.statut}</td>
         <td><button className="btn btn-warning w-100" data-bs-toggle="modal" data-bs-target={`#modal-${internship.idStage}`}>
             Détails
         </button></td>
-        {/* TO DO : Delete the intetrnship record (by internship.idStage) */}
-        { internship.statut === "En révision" && 
-        <td className="ms-auto">
-          <a href="/" className="btn btn-danger" data-bs-dismiss="modal">Supp.</a>
-        </td> }
         <div className="modal modal-blur fade" id={`modal-${internship.idStage}`} tabIndex={-1} aria-hidden="true" style={{display: 'none'}}>
           <div className="modal-dialog modal-lg modal-dialog-centered" role="document">
             <form className="modal-content">
@@ -63,6 +60,12 @@ export default function RowsProfesseur() {
               </div>
               <div className="modal-body">
                 <div className="row">
+                  <div className="col-lg-12">
+                    <div className="mb-3">
+                      <label className="form-label">Nom de l'étudiant</label>
+                      <input type="text" value={internship.nomEtu + " " + internship.prenomEtu} className="form-control" disabled />
+                    </div>
+                  </div>
                   <div className="col-lg-4">
                     <div className="mb-3">
                       <label className="form-label">Date début</label>
@@ -115,12 +118,6 @@ export default function RowsProfesseur() {
                     <div className="mb-3">
                       <label className="form-label">Contact encadrant</label>
                       <input type="text" value={internship.contactEncadrant} placeholder="Email ou GSM" className="form-control" disabled />
-                    </div>
-                  </div>
-                  <div className="col-lg-6">
-                    <div className="mb-3">
-                      <label className="form-label">Professeur encadrant</label>
-                      <input type="text" value={internship.profEncadrant} disabled className="form-control" />
                     </div>
                   </div>
                 </div>

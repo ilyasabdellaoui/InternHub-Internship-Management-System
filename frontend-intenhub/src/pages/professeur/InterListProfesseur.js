@@ -10,7 +10,7 @@ export default function InterListProfesseur() {
     <div className="h-100 page">
       <Navbar nom="Ahmed Lazrak" fonction="Etudiant"/>
       <div className="h-100 page-wrapper">
-        <PageHeader title="Mes stages à encadrer" btnType="warning" btnText="+ Ajouter un stage" target="#new-internship"/>
+        <PageHeader title="Mes stages à encadrer" />
         <TableProfesseur>
           <RowsProfesseur/>
         </TableProfesseur>
