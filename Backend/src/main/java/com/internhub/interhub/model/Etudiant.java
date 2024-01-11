@@ -1,17 +1,18 @@
 package com.internhub.interhub.model;
 
+import com.internhub.interhub.repository.EtudiantRepository;
 import jakarta.persistence.*;
 import java.util.Date;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 public class Etudiant {
-
   // We should use this custom system -> ID = 2 last promo year + num_ds_promo
   @Id
   @Column(name = "num_etu", unique = true, insertable = false, updatable = false)
@@ -21,13 +22,26 @@ public class Etudiant {
   @JoinColumn(name = "annee_promo", nullable = false)
   @Getter @Setter private Promo promo;
 
+  private static int lastNumDsPromo = 0;
+
   @Column(name = "num_ds_promo", nullable = false)
   @Getter @Setter private Integer numDsPromo;
+
+  // Said zdti 3lina lkhdma assa7bi xDD
+  private int calculateUniqueNumDsPromo() {
+    int calculatedNumDsPromo = lastNumDsPromo;
+    while (numDsPromoService.isNumDsPromoExists(calculatedNumDsPromo)) {
+      calculatedNumDsPromo++;
+    }
+    lastNumDsPromo = calculatedNumDsPromo;
+    return calculatedNumDsPromo;
+  }
 
   // Custom method to set the ID before persisting the entity
   @PrePersist
   public void generateCustomId() {
     // ID = 2 last numbers in promo year + num_ds_promo
+    numDsPromo = calculateUniqueNumDsPromo();
     String yearSuffix = promo.getAnneePromo().toString().substring(Math.max(0, promo.getAnneePromo().toString().length() - 2));
     numEtu = Integer.parseInt(yearSuffix + numDsPromo);
   }
@@ -64,4 +78,17 @@ public class Etudiant {
 
   @Column(name = "mention")
   @Getter @Setter private String mention;
+}
+
+// Said zdti 3lina lkhdma assa7bi xDD
+@Service
+class numDsPromoService {
+  private static EtudiantRepository etudiantRepository = null;
+  public numDsPromoService(EtudiantRepository etudiantRepository) {
+    numDsPromoService.etudiantRepository = etudiantRepository;
+  }
+
+  public static boolean isNumDsPromoExists(int numDsPromoToCheck) {
+    return etudiantRepository.isNumDsPromoExists(numDsPromoToCheck);
+  }
 }
