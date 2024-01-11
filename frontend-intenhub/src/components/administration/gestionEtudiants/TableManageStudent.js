@@ -13,6 +13,7 @@ export default function TableManageStudent({children}) {
                 <th>Nom</th>
                 <th>Prenom</th>
                 <th>Infos</th>
+                <th>Supprimer</th>
               </tr>
             </thead>
               {children}
