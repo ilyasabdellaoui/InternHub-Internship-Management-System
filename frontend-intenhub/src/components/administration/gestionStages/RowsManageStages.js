@@ -21,6 +21,24 @@ export default function RowsManageStages() {
 
     fetchData();
   }, []);
+    const handleReject = async (numStage) => {
+      try {
+        const response = await axios.post(
+          "http://localhost:8080/stage/reject",
+          {
+            numStage,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json"
+            },
+          }
+        );
+        console.log(response.data);
+      } catch (error) {
+        console.error("Erreur lors du refus du stage:", error);
+      }
+    };
 
   const handleApprove = async (numStage) => {
     //numStage is an int
@@ -76,9 +94,9 @@ export default function RowsManageStages() {
               </div>
             </td>
             <td className="ms-auto">
-              <a href="/" className="btn btn-danger w-100">
-                Supprimer
-              </a>
+              <button onClick={() => handleReject(stage.numStage)} className="btn btn-danger w-100">
+                Reffuser
+              </button>
             </td>
             <div
               className="modal modal-blur fade"

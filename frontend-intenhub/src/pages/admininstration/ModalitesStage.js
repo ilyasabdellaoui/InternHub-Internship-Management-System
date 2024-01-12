@@ -1,6 +1,8 @@
 import AdminLayout from '../../components/administration/AdminLayout'
 import ModaliteCompetences from '../../components/administration/modalitesStage/ModaliteCompetences'
 import ModaliteDates from '../../components/administration/modalitesStage/ModaliteDates'
+import TableCompetences from "../../components/administration/modalitesStage/TableCompetences";
+import RowsCompetences from "../../components/administration/modalitesStage/RowsCompetences";
 
 export default function ModalitesStage() {
   return (
@@ -28,6 +30,9 @@ export default function ModalitesStage() {
             <div className="row row-deck row-cards">
               <ModaliteDates/>
               <ModaliteCompetences/>
+              <TableCompetences>
+                <RowsCompetences/>
+              </TableCompetences>
             </div>
           </div>
         </div>

@@ -6,7 +6,6 @@ export default function RowsManageStudent() {
   const {
     handleSubmit,
     register,
-    formState: { errors },
   } = useForm();
 
   function onSubmit(data) {
@@ -65,11 +64,6 @@ export default function RowsManageStudent() {
               >
                 Détails
               </button>
-            </td>
-            <td className="ms-auto">
-              <a href="/" className="btn btn-danger w-100">
-                Supprimer
-              </a>
             </td>
 
             <div

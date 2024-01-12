@@ -67,11 +67,6 @@ export default function ModaliteCompetences() {
                   <td>
                     <input type="number" className="form-control" />
                   </td>
-                  <td>
-                    <a href="/" className="btn btn-pinterest w-100 btn-icon" title="Se déconnecter" data-bs-toggle="tooltip" data-bs-placement="bottom">
-                      Supprimer
-                    </a>
-                  </td>
                 </tr>
               </tbody>
             </table>
