@@ -1,6 +1,7 @@
 package com.internhub.interhub.controller;
 
 import com.internhub.interhub.model.ModaliteDate;
+import com.internhub.interhub.model.Stage;
 import com.internhub.interhub.repository.ModaliteDateRepository;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -20,7 +23,7 @@ public class ModaliteDateController {
         this.modaliteDateRepository = modaliteDateRepository;
     }
 
-    @PostMapping("/get")
+/*    @PostMapping("/get")
     public ResponseEntity<?> getModaliteDate(@RequestParam int typeStage) {
         try {
             ModaliteDate modaliteDate = modaliteDateRepository.findByTypeStage(typeStage);
@@ -28,6 +31,29 @@ public class ModaliteDateController {
                 String dateInfoJson = "{\"dateDebut\": \"" + modaliteDate.getDateDebut() + "\", \"dateFin\": \"" + modaliteDate.getDateFin() + "\"}";
 
                 return ResponseEntity.ok(dateInfoJson);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ModaliteDate with the given TypeStage not found.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving ModaliteDate");
+        }
+    }*/
+
+    @PostMapping("/get")
+    public ResponseEntity<?> getModaliteDate(@RequestBody Map<String, Integer> requestBody) {
+        try {
+            int typeStage = requestBody.get("typeStage");
+            ModaliteDate modaliteDate = modaliteDateRepository.findByTypeStage(typeStage);
+            if (modaliteDate != null) {
+                Date dateDebut = modaliteDate.getDateDebut();
+                Date dateFin = modaliteDate.getDateFin();
+
+                Map<String, String> dateInfoMap = new HashMap<>();
+                dateInfoMap.put("dateDebut", String.valueOf(dateDebut));
+                dateInfoMap.put("dateFin", String.valueOf(dateFin));
+
+                return ResponseEntity.ok(dateInfoMap);
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ModaliteDate with the given TypeStage not found.");
             }
