@@ -1,7 +1,19 @@
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import axios from "axios";
 
 export default function RowsManageStudent() {
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
+
+  function onSubmit(data) {
+    console.log(data);
+    window.location.href = "/";
+  }
+
   const [students, setStudents] = useState([]);
 
   useEffect(() => {
@@ -13,12 +25,15 @@ export default function RowsManageStudent() {
         const uniqueStudents = Array.from(
           new Set(
             response.data.map((student) => ({
-              numEtu: student.numEtu,
-              promo: {
-                anneePromo: student.promo.anneePromo,
-              },
-              nomEtu: student.nomEtu,
-              prenomEtu: student.prenomEtu,
+              ...student,
+              dateNaiss: new Date(student.dateNaiss).toLocaleDateString(
+                "fr-FR",
+                {
+                  year: "numeric",
+                  month: "2-digit",
+                  day: "2-digit",
+                }
+              ),
             }))
           )
         );
@@ -32,24 +47,6 @@ export default function RowsManageStudent() {
     fetchData();
   }, []);
 
-  // const students = [
-  //   {
-  //     "numEtu": 123,
-  //     "promo": {
-  //       "anneePromo": "2027"
-  //     },
-  //     "nomEtu": "Najim",
-  //     "prenomEtu" : "Said"
-  //   },
-  //   {
-  //     "numEtu": 124,
-  //     "promo": {
-  //       "anneePromo": "2026"
-  //     },
-  //     "nomEtu": "Abdellaoui",
-  //     "prenomEtu" : "Ilyas"
-  //   }
-  // ];
   return (
     <tbody className="table-tbody">
       {students &&
@@ -69,10 +66,12 @@ export default function RowsManageStudent() {
                 Détails
               </button>
             </td>
-            {/* TO DO : Delete the Professeur record (by professeur.numProf) */}
             <td className="ms-auto">
-              <a href="/" className="btn btn-danger w-100">Supprimer</a>
+              <a href="/" className="btn btn-danger w-100">
+                Supprimer
+              </a>
             </td>
+
             <div
               className="modal modal-blur fade"
               id={`modal-${student.numEtu}`}
@@ -85,9 +84,12 @@ export default function RowsManageStudent() {
                 role="document"
               >
                 <form
-                  className="modal-content">
+                  className="modal-content"
+                  onSubmit={handleSubmit(onSubmit)}
+                >
                   <div className="modal-header">
                     <h5 className="modal-title">Détails étudiant</h5>
+
                     <button
                       type="button"
                       className="btn-close"
@@ -99,47 +101,57 @@ export default function RowsManageStudent() {
                     <div className="row">
                       <div className="col-lg-4">
                         <div className="mb-3">
-                          <label className="form-label">
+                          <label className="form-label required">
                             Nom de l'étudiant
                           </label>
                           <input
                             type="text"
                             name="dateDebut"
                             defaultValue={student.nomEtu}
-                            className="form-control" disabled
+                            {...register("nomEtu", { required: true })}
+                            className="form-control"
+                            disabled
                           />
                         </div>
                       </div>
                       <div className="col-lg-4">
                         <div className="mb-3">
-                          <label className="form-label">
+                          <label className="form-label required">
                             Prenom de l'étudiant
                           </label>
                           <input
                             type="text"
                             name="dateFin"
                             defaultValue={student.prenomEtu}
-                            className="form-control" disabled
+                            {...register("prenomEtu", { required: true })}
+                            className="form-control"
+                            disabled
                           />
                         </div>
                       </div>
                       <div className="col-lg-2">
                         <div className="mb-3">
-                          <label className="form-label">Promo</label>
+                          <label className="form-label required">Promo</label>
                           <input
                             type="number"
+                            disabled
                             defaultValue={student.promo.anneePromo}
-                            className="form-control" disabled
+                            {...register("promo.anneePromo", {
+                              required: true,
+                            })}
+                            className="form-control"
                           />
                         </div>
                       </div>
                       <div className="col-lg-2">
                         <div className="mb-3">
-                          <label className="form-label">Sexe</label>
+                          <label className="form-label required">Sexe</label>
                           <select
                             class="form-select"
-                            defaultValue={student.sexeEtu}
-                            name="numero" disabled
+                            defaultValue={student.qualiteEtu}
+                            {...register("qualiteEtu", { required: true })}
+                            name="numero"
+                            disabled
                           >
                             <option value="M">M</option>
                             <option value="F">F</option>
@@ -154,7 +166,9 @@ export default function RowsManageStudent() {
                           <input
                             type="text"
                             defaultValue={student.dateNaiss}
-                            className="form-control" disabled
+                            {...register("dateNaiss")}
+                            className="form-control"
+                            disabled
                           />
                         </div>
                       </div>
@@ -166,7 +180,9 @@ export default function RowsManageStudent() {
                           <input
                             type="text"
                             defaultValue={student.telEtu}
-                            className="form-control" disabled
+                            {...register("telEtu")}
+                            className="form-control"
+                            disabled
                           />
                         </div>
                       </div>
@@ -178,7 +194,9 @@ export default function RowsManageStudent() {
                           <input
                             type="text"
                             defaultValue={student.villeEtu}
-                            className="form-control" disabled
+                            {...register("villeEtu")}
+                            className="form-control"
+                            disabled
                           />
                         </div>
                       </div>
@@ -190,7 +208,9 @@ export default function RowsManageStudent() {
                           <input
                             type="text"
                             defaultValue={student.adresseEtu}
-                            className="form-control" disabled
+                            {...register("adresseEtu")}
+                            className="form-control"
+                            disabled
                           />
                         </div>
                       </div>
@@ -200,7 +220,9 @@ export default function RowsManageStudent() {
                           <input
                             type="text"
                             defaultValue={student.suiteEtu}
-                            className="form-control" disabled
+                            {...register("suiteEtu")}
+                            className="form-control"
+                            disabled
                           />
                         </div>
                       </div>
@@ -210,7 +232,9 @@ export default function RowsManageStudent() {
                           <input
                             type="text"
                             defaultValue={student.codePostalEtu}
-                            className="form-control" disabled 
+                            {...register("codePostalEtu")}
+                            className="form-control"
+                            disabled
                           />
                         </div>
                       </div>
@@ -222,21 +246,15 @@ export default function RowsManageStudent() {
                           <textarea
                             type="text"
                             defaultValue={student.mention}
-                            className="form-control" disabled
+                            {...register("mention")}
+                            className="form-control"
+                            disabled
                           />
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div className="modal-footer">
-                    <a
-                      href="/"
-                      className="btn btn-link link-secondary"
-                      data-bs-dismiss="modal"
-                    >
-                      Annuler
-                    </a>
-                  </div>
+                  {/* En révision (can delete and update), Accepté, En cours, Achevé */}
                 </form>
               </div>
             </div>

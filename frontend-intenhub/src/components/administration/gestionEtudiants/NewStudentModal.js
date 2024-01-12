@@ -41,12 +41,14 @@ export default function NewStudentModal() {
     //   mention: "ins",
     //   telEtu: "0601020304",
     // };
-    data["numDsPromo"] = "57";
     console.log(data);
     axios.post("http://localhost:8080/student/add", data).then((res) => {
       console.log(res.data);
     });
     annulerRef.current.click();
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
   }
 
   return (
@@ -130,7 +132,7 @@ export default function NewStudentModal() {
                   <label className="form-label required">Sexe</label>
                   <select
                     class="form-select"
-                    {...register("sexeEtu", { required: true })}
+                    {...register("qualiteEtu", { required: true })}
                     name="numero"
                   >
                     <option value="M">M</option>
