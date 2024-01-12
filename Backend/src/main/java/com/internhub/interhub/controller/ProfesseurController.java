@@ -1,16 +1,18 @@
 package com.internhub.interhub.controller;
 
-import com.internhub.interhub.model.Etudiant;
-import com.internhub.interhub.model.Professeur;
-import com.internhub.interhub.model.Stage;
+import com.internhub.interhub.model.*;
 import com.internhub.interhub.repository.ProfesseurRepository;
 import com.internhub.interhub.repository.StageRepository;
+import com.internhub.interhub.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Map;
 
@@ -21,12 +23,14 @@ public class ProfesseurController {
 
     private final ProfesseurRepository professeurRepository;
     private final StageRepository stageRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
     public ProfesseurController(ProfesseurRepository professeurRepository,
-                                StageRepository stageRepository) {
+                                StageRepository stageRepository,
+                                UserRepository userRepository) {
         this.professeurRepository = professeurRepository;
         this.stageRepository = stageRepository;
+        this.userRepository = userRepository;
     }
 
     @PostMapping("/get")
@@ -84,10 +88,49 @@ public class ProfesseurController {
                 return ResponseEntity.status(HttpStatus.CONFLICT).body("Professor with the given ID already exists.");
             }
             professeurRepository.save(professeur);
+
+            User user = new User();
+            Role role = new Role();
+            role.setRoleID(2);
+
+            user.setProfesseur(professeur);
+            user.setRole(role);
+
+            String email = generateUniqueEmail(professeur.getPrenomProf(), professeur.getNomProf(), professeur.getNumProf());
+            user.setUserEmail(email);
+
+            String generatedPassword = generatePassword(String.valueOf(professeur.getNumProf()));
+            user.setUserPassword(generatedPassword);
+            userRepository.save(user);
+
             return ResponseEntity.status(HttpStatus.CREATED).body(professeur.getNumProf());
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error adding professor");
         }
+    }
+
+    public static String generatePassword(String uniqueId) {
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+            byte[] hashBytes = messageDigest.digest(uniqueId.getBytes());
+
+            String password = Base64.getEncoder().encodeToString(hashBytes);
+
+            int maxLength = 10;
+            return password.substring(0, Math.min(password.length(), maxLength));
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static String generateUniqueEmail(String firstName, String lastName, String uniqueId) {
+        int hashCode = uniqueId.hashCode();
+        int positiveHashCode = hashCode & Integer.MAX_VALUE;
+        String formattedId = String.format("%03d", positiveHashCode);
+        String email = firstName.toLowerCase() + "." + lastName.toLowerCase() + formattedId + "@ecm.ma";
+        return email;
     }
 }
