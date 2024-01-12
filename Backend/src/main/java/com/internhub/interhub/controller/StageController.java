@@ -80,6 +80,20 @@ public class StageController {
         }
     }
 
+    @GetMapping("/approve/{numStage}")
+    public ResponseEntity<String> approveStage(@PathVariable int numStage) {
+        try {
+            Stage stage = stageRepository.findByNumStage(numStage);
+            stage.setStatus("Validé");
+            stageRepository.save(stage);
+            return ResponseEntity.ok().body("Stage validated successfully");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+
     @PostMapping("/add")
     public ResponseEntity<?> addStage(@RequestBody Stage stage) {
         try {
