@@ -44,9 +44,11 @@ export default function RowsManageStages() {
             </td>
             {/* TO DO : Update internship status to Accepté */}
             <td className="ms-auto">
-              <a href="/" className="btn btn-success w-100">
+            <div method="get" action={`/stage/approve/${stage.numStage}`}>
+              <button className="btn btn-success w-100">
                 Approuver
-              </a>
+              </button>
+            </div>
             </td>
             <td className="ms-auto">
               <a href="/" className="btn btn-danger w-100">
