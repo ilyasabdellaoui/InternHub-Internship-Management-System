@@ -93,6 +93,18 @@ public class StageController {
         }
     }
 
+    @PostMapping("/reject/{numStage}")
+    public ResponseEntity<String> rejectStage(@RequestBody int numStage) {
+        try {
+            Stage stage = stageRepository.findByNumStage(numStage);
+            stage.setStatus("Refusé");
+            stageRepository.save(stage);
+            return ResponseEntity.ok().body("Stage refusé");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 
     @PostMapping("/add")
     public ResponseEntity<?> addStage(@RequestBody Stage stage) {
