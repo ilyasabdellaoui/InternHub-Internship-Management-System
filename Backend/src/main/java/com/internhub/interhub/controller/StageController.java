@@ -80,8 +80,8 @@ public class StageController {
         }
     }
 
-    @GetMapping("/approve/{numStage}")
-    public ResponseEntity<String> approveStage(@PathVariable int numStage) {
+    @PostMapping("/approve/{numStage}")
+    public ResponseEntity<String> approveStage(@RequestBody int numStage) {
         try {
             Stage stage = stageRepository.findByNumStage(numStage);
             stage.setStatus("Validé");
