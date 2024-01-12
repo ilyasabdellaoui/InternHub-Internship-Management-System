@@ -1,8 +1,10 @@
 import { useRef } from "react";
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function NewStudentModal() {
+  const navigate = useNavigate();
   const {
     handleSubmit,
     register,
@@ -15,6 +17,9 @@ export default function NewStudentModal() {
       console.log(res.data);
     });
     annulerRef.current.click();
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
   }
 
   return (

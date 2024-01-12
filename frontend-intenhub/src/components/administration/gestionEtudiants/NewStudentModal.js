@@ -46,6 +46,9 @@ export default function NewStudentModal() {
       console.log(res.data);
     });
     annulerRef.current.click();
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
   }
 
   return (
