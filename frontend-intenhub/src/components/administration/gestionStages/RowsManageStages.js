@@ -195,6 +195,12 @@ export default function RowsManageStages() {
                           />
                         </div>
                       </div>
+                      <div className="col-lg-4">
+                        <div className="mb-3">
+                          <label className="form-label">Type stage</label>
+                          <input type="text" value={stage.typeStage.codeType} className="form-control" disabled />
+                        </div>
+                      </div>
                       <div className="col-lg-6">
                         <div className="mb-3">
                           <label className="form-label">
