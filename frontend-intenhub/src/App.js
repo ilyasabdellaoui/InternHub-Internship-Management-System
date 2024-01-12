@@ -5,6 +5,7 @@ import GestionEtudiants from './pages/admininstration/GestionEtudiants';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import GestionProfesseurs from './pages/admininstration/GestionProfesseurs';
 import GestionCompetences from './pages/admininstration/GestionCompetences';
+import GestionStages from './pages/admininstration/GestionStages';
 import ModalitesStage from './pages/admininstration/ModalitesStage';
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
           <Route path="/admin/professeurs" element={<GestionProfesseurs />} />
           <Route path="/admin/competences" element={<GestionCompetences />} />
           <Route path="/admin/modalitesstages" element={<ModalitesStage />} />
-          {/* <GestionEtudiants /> */}
+          <Route path="/admin/stages" element={<GestionStages />} />
           {/* <InterListProfesseur/> */}
           {/* <InterListStudent/> */}
           {/* <DashboardAdmin/> */}
