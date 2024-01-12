@@ -43,21 +43,6 @@ export default function RowsManageprofesseur() {
 
     fetchData();
   }, []);
-
-  const professeurs = [
-    {
-      numProf: 123,
-      genreProf: "M",
-      nomProf: "Najim",
-      prenomProf: "Said",
-    },
-    {
-      numProf: 1243,
-      genreProf: "F",
-      nomProf: "Najlaa",
-      prenomProf: "who",
-    },
-  ];
   return (
     <tbody className="table-tbody">
       {profs &&
@@ -75,12 +60,6 @@ export default function RowsManageprofesseur() {
               >
                 Détails
               </button>
-            </td>
-            {/* TO DO : Delete the Professeur record (by professeur.numProf) */}
-            <td className="ms-auto">
-              <a href="/" className="btn btn-danger w-100">
-                Supprimer
-              </a>
             </td>
             <div
               className="modal modal-blur fade"
