@@ -2,9 +2,12 @@ package com.internhub.interhub.controller;
 
 import com.internhub.interhub.model.ModaliteDate;
 import com.internhub.interhub.repository.ModaliteDateRepository;
+import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 import java.util.Optional;
 
 @RestController
@@ -34,18 +37,48 @@ public class ModaliteDateController {
         }
     }
 
-    @PutMapping("/update/{typeStage}")
-    public ResponseEntity<?> updateModaliteDate(@RequestBody ModaliteDate newModaliteDate, @PathVariable int typeStage) {
+//    @PutMapping("/update/{typeStage}")
+//    public ResponseEntity<?> updateModaliteDate(@RequestBody ModaliteDate newModaliteDate, @PathVariable int typeStage) {
+//        Optional<ModaliteDate> existingModaliteDateOptional = Optional.ofNullable(modaliteDateRepository.findByTypeStage(typeStage));
+//
+//        if (existingModaliteDateOptional.isPresent()) {
+//            ModaliteDate existingModaliteDate = existingModaliteDateOptional.get();
+//            existingModaliteDate.setDateDebut(newModaliteDate.getDateDebut());
+//            existingModaliteDate.setDateFin(newModaliteDate.getDateFin());
+//            return ResponseEntity.ok(modaliteDateRepository.save(existingModaliteDate));
+//        } else {
+//            newModaliteDate.setTypeStage(typeStage);
+//            return ResponseEntity.ok(modaliteDateRepository.save(newModaliteDate));
+//        }
+//    }
+//}
+
+    @PostMapping("/update")
+    public ResponseEntity<?> updateModaliteDate(@RequestBody ModaliteDateRequest modaliteDateRequest) {
+        int typeStage = modaliteDateRequest.getTypeStage();
         Optional<ModaliteDate> existingModaliteDateOptional = Optional.ofNullable(modaliteDateRepository.findByTypeStage(typeStage));
 
         if (existingModaliteDateOptional.isPresent()) {
             ModaliteDate existingModaliteDate = existingModaliteDateOptional.get();
-            existingModaliteDate.setDateDebut(newModaliteDate.getDateDebut());
-            existingModaliteDate.setDateFin(newModaliteDate.getDateFin());
+            existingModaliteDate.setDateDebut(modaliteDateRequest.getDateDebut());
+            existingModaliteDate.setDateFin(modaliteDateRequest.getDateFin());
             return ResponseEntity.ok(modaliteDateRepository.save(existingModaliteDate));
         } else {
+            ModaliteDate newModaliteDate = new ModaliteDate();
             newModaliteDate.setTypeStage(typeStage);
+            newModaliteDate.setDateDebut(modaliteDateRequest.getDateDebut());
+            newModaliteDate.setDateFin(modaliteDateRequest.getDateFin());
             return ResponseEntity.ok(modaliteDateRepository.save(newModaliteDate));
         }
     }
+}
+
+@Data
+class ModaliteDateRequest {
+    private int typeStage;
+    private Date dateDebut;
+    private Date dateFin;
+
+    // Getter and setter methods
+    // ...
 }
