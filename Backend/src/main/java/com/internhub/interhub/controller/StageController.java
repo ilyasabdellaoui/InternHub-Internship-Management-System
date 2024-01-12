@@ -95,9 +95,10 @@ public class StageController {
         }
     }
 
-    @PostMapping("/reject/{numStage}")
-    public ResponseEntity<String> rejectStage(@RequestBody int numStage) {
+    @PostMapping("/reject")
+    public ResponseEntity<String> rejectStage(@RequestBody Map<String, Integer> requestBody) {
         try {
+            int numStage = requestBody.get("numStage");
             Stage stage = stageRepository.findByNumStage(numStage);
             stage.setStatus("Refusé");
             stageRepository.save(stage);
