@@ -78,7 +78,4 @@ class ModaliteDateRequest {
     private int typeStage;
     private Date dateDebut;
     private Date dateFin;
-
-    // Getter and setter methods
-    // ...
 }
