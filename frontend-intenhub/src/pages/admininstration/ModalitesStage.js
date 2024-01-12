@@ -6,7 +6,7 @@ import RowsCompetences from "../../components/administration/modalitesStage/Rows
 
 export default function ModalitesStage() {
   return (
-    <AdminLayout>
+    <AdminLayout active="modalites">
       <div className="page-wrapper">
         {/* Page header */}
         <div className="page-header d-print-none">
