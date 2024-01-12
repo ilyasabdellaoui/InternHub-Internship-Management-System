@@ -1,9 +1,9 @@
 package com.internhub.interhub.repository;
 
-import com.internhub.interhub.model.Professeur;
+import com.internhub.interhub.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ProfesseurRepository extends JpaRepository<Professeur, Long> {
-  Professeur findByNumProf(String numProf);
-  boolean existsByNumProf(String numProf);
+public interface UserRepository extends JpaRepository<User, Long> {
+  User findByUserEmail(String userEmail);
+  boolean existsByUserEmail(String userEmail);
 }
