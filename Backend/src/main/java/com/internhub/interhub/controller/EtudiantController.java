@@ -100,18 +100,15 @@ public class EtudiantController {
     @PostMapping("mesStages")
     public ResponseEntity<?> mesStages(@RequestBody Map<String, String> requestBody) {
         try {
-            int numEtu = Integer.parseInt(requestBody.get("numEtu"));
-            Etudiant student = etudiantRepository.findByNumEtu(numEtu);
-            List<Stage> stages = new ArrayList<>();
-            if (student != null) {
-                Stage stage = stageRepository.findStageByEtudiant(student);
-                if (stage != null) {
-                    stages.add(stage);
-                }
+            String numEtu = String.valueOf(requestBody.get("numEtu"));
+            Etudiant etudiant = etudiantRepository.findByNumEtu(Integer.valueOf(numEtu));
+
+            if (etudiant != null) {
+                List<Stage> stages = stageRepository.findStagesByEtudiant(etudiant);
+                return ResponseEntity.ok(stages);
             } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student with the given ID have no recoreded Stage not found.");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No stage for the student with the given ID.");
             }
-            return ResponseEntity.ok(stages);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving stages for Student");
