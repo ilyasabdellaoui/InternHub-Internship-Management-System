@@ -6,7 +6,7 @@ import TableManageCompetences from "../../components/administration/gestionCompe
 
 export default function GestionCompetences() {
   return (
-    <AdminLayout>
+    <AdminLayout active="gesCompetences">
       <div className="page-wrapper">
         {/* Page header */}
         <PageHeader title="Gestion des compétences" btnText="+ Ajoute une compétence" target="#new-competence"/>

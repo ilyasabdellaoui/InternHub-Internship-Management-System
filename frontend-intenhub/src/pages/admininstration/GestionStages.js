@@ -5,7 +5,7 @@ import RowsManageStages from "../../components/administration/gestionStages/Rows
 
 export default function GestionStages() {
   return (
-    <AdminLayout>
+    <AdminLayout active="gesStages">
       <div className="page-wrapper">
         {/* Page header */}
         <PageHeader title="Gestion des stages"/>

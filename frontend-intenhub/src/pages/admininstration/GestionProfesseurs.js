@@ -6,7 +6,7 @@ import RowsManageProfesseurs from "../../components/administration/gestionProfes
 
 export default function GestionProfesseurs() {
   return (
-    <AdminLayout>
+    <AdminLayout active="gesProf">
       <div className="page-wrapper">
         {/* Page header */}
         <PageHeader title="Gestion des professeurs" btnText="+ Ajoute un professeur" target="#new-professor"/>

@@ -6,7 +6,7 @@ import RowsManageStudent from "../../components/administration/gestionEtudiants/
 
 export default function GestionEtudiants() {
   return (
-    <AdminLayout>
+    <AdminLayout active="gesEtu">
       <div className="page-wrapper">
         {/* Page header */}
         <PageHeader title="Gestion des étudiants" btnText="+ Ajoute un étudiant" target="#new-student"/>
