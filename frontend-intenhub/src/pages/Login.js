@@ -1,25 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import largeLogo from "../images/largeLogo2.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function Login() {
-  const [role, setRole] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const navigate = useNavigate();
 
   function handleClick(e) {
-    axios.post();
     e.preventDefault();
-    console.log(role);
-    if (role === "etudiant") {
-      navigate("/etudiant/stages");
-    } else if (role === "professeur") {
-      navigate("/professeur/stages");
-    } else if (role === "administrateur") {
-      navigate("/admin/etudiants");
-    }
+    let role = "";
+    axios
+      .post("http://localhost:8080/auth/login", {
+        userEmail,
+        userPassword,
+      })
+      .then((response) => {
+        console.log(response);
+        role = response.data.roleName;
+        console.log(role);
+        if (role === "etudiant") {
+          localStorage.setItem("numEtu", response.data.numEtu);
+          navigate("/etudiant/stages");
+        } else if (role === "professeur") {
+          localStorage.setItem("numProf", response.data.numProf);
+          navigate("/professeur/stages");
+        } else if (role === "admin") {
+          navigate("/admin/etudiants");
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   return (
