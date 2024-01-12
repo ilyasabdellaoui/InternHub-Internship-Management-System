@@ -30,8 +30,9 @@ public class ProfesseurController {
     }
 
     @PostMapping("/get")
-    public ResponseEntity<?> getProfessor(@RequestParam String numProf) {
+    public ResponseEntity<?> getProfessor(@RequestBody Map<String, String> requestBody) {
         try {
+            String numProf = requestBody.get("numProf");
             Professeur professeur = professeurRepository.findByNumProf(numProf);
             if (professeur != null) {
                 return ResponseEntity.ok(professeur);
@@ -43,6 +44,9 @@ public class ProfesseurController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving Professor");
         }
     }
+
+
+
 
     @GetMapping("/getAll")
     public ResponseEntity<List<Professeur>> getAllStudents() {
