@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/stage")
@@ -80,9 +81,10 @@ public class StageController {
         }
     }
 
-    @PostMapping("/approve/{numStage}")
-    public ResponseEntity<String> approveStage(@RequestBody int numStage) {
+    @PostMapping("/approve")
+    public ResponseEntity<String> approveStage(@RequestBody Map<String, Integer> requestBody) {
         try {
+            int numStage = requestBody.get("numStage");
             Stage stage = stageRepository.findByNumStage(numStage);
             stage.setStatus("Validé");
             stageRepository.save(stage);
