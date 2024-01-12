@@ -85,11 +85,12 @@ public class EtudiantController {
             role.setRoleID(3);
 
             user.setEtudiant(etudiant);
-            String email = etudiant.getNomEtu() + etudiant.getNumEtu() + "@ecm.ma";
             user.setRole(role);
+
+            String email = generateUniqueEmail(etudiant.getPrenomEtu(), etudiant.getNomEtu(), String.valueOf(etudiant.getNumEtu()));
             user.setUserEmail(email);
-            String generatedPassword = generatePassword(String.valueOf(etudiant.getNumEtu()));
-            user.setUserPassword(generatedPassword);
+
+            user.setUserPassword(generatePassword(String.valueOf(etudiant.getNumEtu())));
             userRepository.save(user);
             return ResponseEntity.status(HttpStatus.CREATED).body(etudiant.getNumEtu());
         } catch (DataIntegrityViolationException e) {
@@ -132,5 +133,13 @@ public class EtudiantController {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static String generateUniqueEmail(String firstName, String lastName, String uniqueId) {
+        int hashCode = uniqueId.hashCode();
+        int positiveHashCode = hashCode & Integer.MAX_VALUE;
+        String formattedId = String.format("%03d", positiveHashCode);
+        String email = firstName.toLowerCase() + "." + lastName.toLowerCase() + formattedId + "@ecm.ma";
+        return email;
     }
 }
