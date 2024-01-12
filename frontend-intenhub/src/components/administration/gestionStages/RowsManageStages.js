@@ -8,7 +8,7 @@ export default function RowsManageStages() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8080/stage/getAll"
+          "http://localhost:8080/stage/getRevision"
         );
         console.log(response.data);
         const uniqueStages = Array.from(
