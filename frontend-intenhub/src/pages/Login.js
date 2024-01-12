@@ -1,12 +1,16 @@
 import { useState } from "react";
 import largeLogo from "../images/largeLogo2.png";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function Login() {
-  const [role, setRole] = useState("etudiant");
+  const [role, setRole] = useState("");
+  const [userEmail, setUserEmail] = useState("");
+  const [userPassword, setUserPassword] = useState("");
   const navigate = useNavigate();
 
   function handleClick(e) {
+    axios.post();
     e.preventDefault();
     console.log(role);
     if (role === "etudiant") {
@@ -37,11 +41,11 @@ export default function Login() {
             autoComplete="off"
             noValidate
           >
-            <select name="role" onChange={(e) => setRole(e.target.value)}>
+            {/* <select name="role" onChange={(e) => setRole(e.target.value)}>
               <option value="etudiant">Etudiant</option>
               <option value="professeur">Professeur</option>
               <option value="administrateur">Administrateur</option>
-            </select>
+            </select> */}
             <div className="card-body text-center">
               <div className="mb-4">
                 <h2 className="card-title">Connectez vous</h2>
@@ -55,6 +59,7 @@ export default function Login() {
                   type="text"
                   className="form-control"
                   placeholder="Nom d'utilisateur"
+                  onChange={(e) => setUserEmail(e.target.value)}
                 />
               </div>
               <div>
@@ -63,6 +68,7 @@ export default function Login() {
                     type="password"
                     className="form-control"
                     placeholder="Mot de passe"
+                    onChange={(e) => setUserPassword(e.target.value)}
                   />
                 </div>
                 <div>
