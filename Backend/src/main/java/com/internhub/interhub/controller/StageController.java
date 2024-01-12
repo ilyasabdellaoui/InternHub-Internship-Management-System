@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/stage")
@@ -60,6 +61,25 @@ public class StageController {
         }
     }
 
+    @GetMapping("/getRevision")
+    public ResponseEntity<List<Stage>> getAllStagesEnRevision() {
+        try {
+            List<Stage> stages = stageRepository.findAll();
+            List<Stage> stagesInRevision = new ArrayList<>();
+
+            for (Stage s : stages) {
+                if ("En révision".equals(s.getStatus())) {
+                    stagesInRevision.add(s);
+                }
+            }
+
+            return ResponseEntity.ok(stagesInRevision);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
     @PostMapping("/add")
     public ResponseEntity<?> addStage(@RequestBody Stage stage) {
         try {
@@ -88,6 +108,8 @@ public class StageController {
             }
 
             // Save the Stage
+            stage.setStatus("En révision");
+            System.out.println(stage);
             stageRepository.save(stage);
             return ResponseEntity.status(HttpStatus.CREATED).body(stage.getNumStage());
         } catch (DataIntegrityViolationException e) {
