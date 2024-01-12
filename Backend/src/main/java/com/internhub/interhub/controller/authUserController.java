@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/auth")
 @CrossOrigin(origins = "http://localhost:3000")
@@ -45,9 +48,11 @@ public class authUserController {
                         id = "Admin@123";
                 }
 
-                StringBuilder userLogged = new StringBuilder();
-                userLogged.append("{\n\t\"roleName: \"").append(role).append("\",\n\t\"").append(idName).append("\": \"").append(id).append("\"\n}");
-                return ResponseEntity.ok().body(userLogged);
+                Map<String, String> responseMap = new HashMap<>();
+                responseMap.put("roleName", role);
+                responseMap.put(idName, id);
+
+                return ResponseEntity.ok().body(responseMap);
             }
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User with given Credentials not found");
         } catch (Exception e) {
