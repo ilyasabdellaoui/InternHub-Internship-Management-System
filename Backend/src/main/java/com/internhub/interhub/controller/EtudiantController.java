@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
@@ -38,8 +39,9 @@ public class EtudiantController {
     }
 
     @PostMapping("/get")
-    public ResponseEntity<?> getStudent(@RequestParam int numEtu) {
+    public ResponseEntity<?> getStudent(@RequestBody Map<String, String> requestBody) {
         try {
+            int numEtu = Integer.parseInt(requestBody.get("numEtu"));
             Etudiant student = etudiantRepository.findByNumEtu(numEtu);
             if (student != null) {
                 return ResponseEntity.ok(student);
@@ -51,6 +53,7 @@ public class EtudiantController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error retrieving student");
         }
     }
+
 
     @GetMapping("/getAll")
     public ResponseEntity<List<Etudiant>> getAllStudents() {

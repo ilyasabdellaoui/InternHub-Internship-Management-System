@@ -21,19 +21,6 @@ export default function RowsManageCompetences() {
     fetchData();
   }, []);
 
-  // const competences = [
-  //   {
-  //     "codeCompetence": 123,
-  //     "libelle": "Boom Boom",
-  //     "description" : "kat3rf dir boom boom, kat3rf dir boom boom, kat3rf dir boom boom ..."
-  //   },
-  //   {
-  //     "codeCompetence": 1223,
-  //     "libelle": "Zda7 Zda7",
-  //     "description" : "kat3rf dir Zda7 Zda7, kat3rf dir Zda7 Zda7, kat3rf dir Zda7 Zda7 ..."
-  //   }
-  // ];
-
   return (
     <tbody className="table-tbody">
       {competences.map((competence) => (
@@ -49,12 +36,6 @@ export default function RowsManageCompetences() {
             >
               Détails
             </button>
-          </td>
-          {/* TO DO : Delete the competence record (by competence.codeCompetence) */}
-          <td className="ms-auto">
-            <a href="/" className="btn btn-danger w-100">
-              Supprimer
-            </a>
           </td>
           <div
             className="modal modal-blur fade"

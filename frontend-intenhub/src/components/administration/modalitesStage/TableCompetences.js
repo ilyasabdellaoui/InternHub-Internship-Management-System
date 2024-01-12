@@ -1,17 +1,18 @@
-export default function TableManageCompetences({children}) {
+export default function TableCompetences({children}) {
   return (
-    <div className="page-body">
-    <div className="container-xl">
+    <div className="col-12">
       <div className="card">
+      <div className="card-header">
+          <h3 className="card-title">Éxigences requises aux stages</h3>
+        </div>
         <div className="card-body">
           <div id="table-default" className="table-responsive">
           <table className="table">
             <thead>
               <tr>
-                <th>Code</th>
-                <th>Label</th>
-                <th>Description</th>
-                <th>Infos</th>
+                <th>Type stage</th>
+                <th>Libelle compétence</th>
+                <th>Niveau requis</th>
               </tr>
             </thead>
               {children}
@@ -19,7 +20,6 @@ export default function TableManageCompetences({children}) {
           </div>
         </div>
       </div>
-    </div>
     </div>
   )
 }
